@@ -16,5 +16,9 @@ namespace tema.Controllers
                 List<Gender> objCategoryList = _db.Genders.ToList();
             return View(objCategoryList);
         }
+        public IActionResult Create()
+        {
+            return View();
+        }
     }
 }
