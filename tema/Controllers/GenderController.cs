@@ -20,5 +20,12 @@ namespace tema.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public IActionResult Create(Gender obj)
+        {
+            _db.Genders.Add(obj);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }
