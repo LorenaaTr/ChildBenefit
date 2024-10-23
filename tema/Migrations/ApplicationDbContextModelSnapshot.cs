@@ -94,6 +94,29 @@ namespace tema.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Genders");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AlDescription = "Femer",
+                            EnDescription = "Female",
+                            SrDescription = "Zensko"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AlDescription = "Mashkull",
+                            EnDescription = "Male",
+                            SrDescription = "Muski"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AlDescription = "Te tjera",
+                            EnDescription = "Others",
+                            SrDescription = "Drugi"
+                        });
                 });
 
             modelBuilder.Entity("tema.Models.Language", b =>
