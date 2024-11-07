@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace tema.Models
+namespace Tema.Models
 {
-    public class Relation
+    public class Criteria
     {
         public int Id { get; set; }
         [Required]

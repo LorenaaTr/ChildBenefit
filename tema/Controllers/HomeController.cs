@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using tema.Models;
+using Tema.Models;
 
 namespace tema.Controllers
 {

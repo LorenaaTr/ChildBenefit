@@ -4,13 +4,14 @@
     <div class="card-header bg-secondary bg-gradient ml-0 py-3">
         <div class="row">
             <div class="col-12 text-center">
-                <h2 class="text-primary">Shto Gjini</h2>
+                <h2 class="text-primary">Perditso Gjini</h2>
             </div>
         </div>
     </div>
     <div class="card-body p-4">
-        <form method="post" class="row">
-            <div class="border p-3">
+        <form method="post">
+            <input asp-for="Id" hidden />
+            <div class="border p-3 mt-4">
                 <div class="form-floating py-2 col-12">
                     <input asp-for="AlDescription" type="text" class="form-control border-0 shadow" />
                     <label class="ms-2">Pershkrimi Gjinis</label>
@@ -26,10 +27,10 @@
                 </div>
                 <div class="row pt-2">
                     <div class="col-6 col-md-3">
-                        <button type="submit" class="btn btn-primary form-control">Shto</button>
+                        <button type="submit" class="btn btn-primary form-control">Perditso</button>
                     </div>
                     <div class="col-6 col-md-3">
-                        <a asp-controller="Gender" asp-action="Index" class="btn btn-outline-primary form-control border">Kthehu Prapa</a>
+                        <a asp-controller="Gender" asp-action="Index" class="btn btn-outline-secondary form-control border">Kthehu Prapa</a>
                     </div>
                 </div>
             </div>
@@ -39,8 +40,8 @@
 
 
 
-@section Scripts{
+@section Scripts {
     @{
-    <partial name="_ValidationScriptsPartial"/>
+        <partial name="_ValidationScriptsPartial" />
     }
 }

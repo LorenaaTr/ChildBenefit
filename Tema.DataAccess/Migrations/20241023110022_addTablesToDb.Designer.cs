@@ -8,7 +8,7 @@ using tema.Data;
 
 #nullable disable
 
-namespace tema.Migrations
+namespace tema.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20241023110022_addTablesToDb")]

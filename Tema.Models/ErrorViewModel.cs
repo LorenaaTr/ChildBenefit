@@ -1,4 +1,4 @@
-namespace tema.Models
+namespace Tema.Models
 {
     public class ErrorViewModel
     {

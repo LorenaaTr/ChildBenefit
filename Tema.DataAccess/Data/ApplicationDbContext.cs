@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using tema.Models;
+using Tema.Models;
 
 namespace tema.Data
 {

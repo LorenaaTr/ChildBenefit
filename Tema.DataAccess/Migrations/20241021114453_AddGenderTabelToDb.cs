@@ -2,16 +2,16 @@
 
 #nullable disable
 
-namespace tema.Migrations
+namespace tema.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class addCountriesToDb : Migration
+    public partial class AddGenderTabelToDb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Countries",
+                name: "Genders",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -22,7 +22,7 @@ namespace tema.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Countries", x => x.Id);
+                    table.PrimaryKey("PK_Genders", x => x.Id);
                 });
         }
 
@@ -30,7 +30,7 @@ namespace tema.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Countries");
+                name: "Genders");
         }
     }
 }

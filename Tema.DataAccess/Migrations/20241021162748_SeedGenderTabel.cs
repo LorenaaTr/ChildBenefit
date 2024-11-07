@@ -4,7 +4,7 @@
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace tema.Migrations
+namespace tema.DataAccess.Migrations
 {
     /// <inheritdoc />
     public partial class SeedGenderTabel : Migration

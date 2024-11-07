@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace tema.Models
+namespace Tema.Models
 {
-    public class Language
+    public class MaritalStatus
     {
         public int Id { get; set; }
         [Required]

@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace tema.Migrations
+namespace tema.DataAccess.Migrations
 {
     /// <inheritdoc />
     public partial class addTablesToDb : Migration
