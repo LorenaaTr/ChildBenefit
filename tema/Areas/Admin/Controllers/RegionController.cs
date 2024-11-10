@@ -3,18 +3,19 @@ using tema.Data;
 using Tema.DataAccess.Repository.IRepository;
 using Tema.Models;
 
-namespace tema.Controllers
+namespace tema.Areas.Admin.Controllers
 {
-    public class GenderController : Controller
+    [Area("Admin")]
+    public class RegionController : Controller
     {
-        private readonly IGenderRepository _genderRepo;
-        public GenderController(IGenderRepository db)
+        private readonly IUnitOfWork _unitOfWork;
+        public RegionController(IUnitOfWork unitOfWork)
         {
-           _genderRepo = db;
+            _unitOfWork = unitOfWork;
         }
         public IActionResult Index()
         {
-                List<Gender> objCategoryList = _genderRepo.GetAll().ToList();
+            List<Region> objCategoryList = _unitOfWork.Region.GetAll().ToList();
             return View(objCategoryList);
         }
         public IActionResult Create()
@@ -22,13 +23,13 @@ namespace tema.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(Gender obj)
+        public IActionResult Create(Region obj)
         {
             if (ModelState.IsValid)
             {
-                _genderRepo.Add(obj);
-                _genderRepo.Save();
-                TempData["success"] = "Gjinia eshte krijuar me sukses";
+                _unitOfWork.Region.Add(obj);
+                _unitOfWork.Save();
+                TempData["success"] = "Regjioni eshte krijuar me sukses";
                 return RedirectToAction("Index");
             }
             return View();
@@ -36,58 +37,58 @@ namespace tema.Controllers
 
         public IActionResult Edit(int? id)
         {
-            if (id == null || id == 0) 
+            if (id == null || id == 0)
             {
                 return NotFound();
             }
-            Gender genderFromDb = _genderRepo.Get(u=>u.Id == id);
-            if (genderFromDb == null) 
+            Region regionFromDb = _unitOfWork.Region.Get(u => u.Id == id);
+            if (regionFromDb == null)
             {
                 return NotFound();
             }
-            return View(genderFromDb);
+            return View(regionFromDb);
         }
         [HttpPost]
-        public IActionResult Edit(Gender obj)
+        public IActionResult Edit(Region obj)
         {
             if (ModelState.IsValid)
             {
-                _genderRepo.Update(obj);
-                _genderRepo.Save();
-                TempData["success"] = "Gjinia eshte perditsuar me sukses";
+                _unitOfWork.Region.Update(obj);
+                _unitOfWork.Save();
+                TempData["success"] = "Regjioni eshte perditsuar me sukses";
                 return RedirectToAction("Index");
             }
             return View();
         }
 
-        
+
         public IActionResult Delete(int? id)
         {
             if (id == null || id == 0)
             {
                 return NotFound();
             }
-            Gender? genderFromDb = _genderRepo.Get(u => u.Id == id);
-            if (genderFromDb == null)
+            Region? regionFromDb = _unitOfWork.Region.Get(u => u.Id == id);
+            if (regionFromDb == null)
             {
                 return NotFound();
             }
-            return View(genderFromDb);
+            return View(regionFromDb);
         }
         [HttpPost, ActionName("Delete")]
         public IActionResult DeletePOST(int? id)
         {
-            Gender? obj = _genderRepo.Get(u=>u.Id==id);
+            Region? obj = _unitOfWork.Region.Get(u => u.Id == id);
             if (obj == null)
             {
                 return NotFound();
             }
 
-            _genderRepo.Remove(obj);
-            _genderRepo.Save();
-            TempData["success"] = "Gjinia eshte fshire me sukses";
+            _unitOfWork.Region.Remove(obj);
+            _unitOfWork.Save();
+            TempData["success"] = "Regjioni eshte fshire me sukses";
             return RedirectToAction("Index");
-          
+
         }
     }
 }

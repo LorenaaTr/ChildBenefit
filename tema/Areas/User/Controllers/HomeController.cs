@@ -2,8 +2,9 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using Tema.Models;
 
-namespace tema.Controllers
+namespace tema.Areas.User.Controllers
 {
+    [Area("User")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

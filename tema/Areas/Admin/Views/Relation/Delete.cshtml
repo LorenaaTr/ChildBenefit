@@ -1,0 +1,41 @@
+﻿@model Relation
+
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-primary">Fshij Relacion</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post">
+            <input asp-for="Id" hidden />
+            <div class="border p-3 mt-4">
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="AlDescription" disabled type="text" class="form-control border-0 shadow" />
+                    <label class="ms-2">Pershkrimi Relacionit</label>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="EnDescription" disabled type="text" class="form-control border-0 shadow" />
+                    <label class="ms-2">Pershkrimi Relacionit ne gjuhen Angleze</label>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="SrDescription" disabled type="text" class="form-control border-0 shadow" />
+                    <label class="ms-2">Pershkrimi Relacionit ne gjuhen Serbe</label>
+                </div>
+                <div class="row pt-2">
+                    <div class="col-6 col-md-3">
+                        <button type="submit" class="btn btn-danger form-control">Fshije</button>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-controller="Relation" asp-action="Index" class="btn btn-outline-secondary form-control border">Kthehu Prapa</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+

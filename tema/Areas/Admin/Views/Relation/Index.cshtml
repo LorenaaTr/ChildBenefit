@@ -1,0 +1,52 @@
+@model List<Relation>
+
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-primary">Lista Relacioneve</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <div class="row  pb-2 ">
+            <div class="col-6">
+            </div>
+            <div class="col-6 text-end">
+                <a asp-controller="Relation" asp-action="Create" class="btn btn-primary">
+                    <i class="bi bi-plus-circle"></i> Shto Relacion
+                </a>
+            </div>
+        </div>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Gjinia</th>
+                    <th>Gjinia Anglisht</th>
+                    <th>Gjinia Serbisht</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var obj in Model)
+                {
+                    <tr>
+                        <td>@obj.AlDescription</td>
+                        <td>@obj.EnDescription</td>
+                        <td>@obj.SrDescription</td>
+                        <td>
+                            <div class="w-75 btn-group" role="group">
+                                <a asp-controller="Relation" asp-action="Edit" asp-route-id="@obj.Id" class="btn btn-primary mx-2">
+                                    <i class="bi bi-pencil-square"></i>Edit
+                                </a>
+                                <a asp-controller="Relation" asp-action="Delete" asp-route-id="@obj.Id" method="post" class="btn btn-danger mx-2">
+                                    <i class="bi bi-trash-fill"></i>Delete
+                                </a>
+
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
