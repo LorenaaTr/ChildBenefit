@@ -18,6 +18,7 @@ namespace tema.Data
         public DbSet<Nationality> Nationalities { get; set; }
         public DbSet<Region> Regions { get; set; }
         public DbSet<Relation> Relations { get; set; }
+        public DbSet<Bank> Banks { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -72,6 +73,16 @@ namespace tema.Data
             modelBuilder.Entity<Relation>().HasData(
                 new Relation { Id =  1, AlDescription = "Femije", EnDescription = "Child", SrDescription = "Deco" },
                 new Relation { Id =  2, AlDescription = "Prind/Kujdestar", EnDescription = "Parent/ Custodian", SrDescription = "Roditejl" }
+           );
+            modelBuilder.Entity<Bank>().HasData(
+               new Bank { Id = 1, BankName = "Raiffeisen Bank", AkronimiBankes = "RBKO" },
+               new Bank { Id = 2, BankName = "ProCredit Bank", AkronimiBankes = "PCBK" },
+               new Bank { Id = 3, BankName = "NLB Bank", AkronimiBankes = "NLB" },
+               new Bank { Id = 4, BankName = "TEB Bank", AkronimiBankes = "TEBK" },
+               new Bank { Id = 5, BankName = "BPB Bank", AkronimiBankes = "BPB" },
+               new Bank { Id = 6, BankName = "Banka Ekonomike", AkronimiBankes = "BEK" },
+               new Bank { Id = 7, BankName = "Ziraat Bank", AkronimiBankes = "ZIRAAT" },
+               new Bank { Id = 8, BankName = "Komercijalna Banka", AkronimiBankes = "KB" }
            );
         }
        

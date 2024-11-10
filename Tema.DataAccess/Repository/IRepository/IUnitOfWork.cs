@@ -16,6 +16,7 @@ namespace Tema.DataAccess.Repository.IRepository
         INationalityRepository Nationality { get; }
         IRegionRepository Region { get; }
         IRelationRepository Relation { get; }
+        IBankRepository Bank { get; }
         void Save();
     }
 }

@@ -1,22 +1,91 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
+    html {
+        font-size: 16px;
+    }
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px; /* Ensure space for the footer */
+    margin-top: 60px; /* Ensure space for the navbar */
 }
+
+/* Sidebar styling */
+.sidebar {
+    position: fixed;
+    top: 60px; /* Adjusted to align the sidebar below the navbar */
+    left: 0;
+    width: 250px;
+    height: calc(100vh - 60px); /* Full height minus navbar height */
+    background-color: #d3d3d3; /* Light grey color */
+    padding-right: 10px;
+    padding-top: 20px; /* Adjust for top space from navbar */
+    z-index: 999; /* Ensure sidebar stays below navbar */
+}
+
+    /* Sidebar links */
+    .sidebar a {
+        color: #333; /* Dark text color */
+        padding: 10px 15px;
+        text-decoration: none;
+        display: block;
+    }
+
+        .sidebar a:hover {
+            background-color: #a9a9a9; /* Darker grey on hover */
+        }
+
+/* Main content area */
+.main-content {
+    margin-left: 250px; /* Make space for the sidebar */
+    padding: 20px;
+    margin-top: 60px; /* Ensure content doesn't hide behind navbar */
+}
+
+/* Navbar styling */
+nav.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure navbar stays above sidebar */
+    background-color: #0d6efd; /* Blue color for navbar */
+    padding: 15px; /* Adjust padding for better appearance */
+}
+
+/* Footer styling */
+footer {
+    position: relative;
+    background-color: #0d6efd;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Logo styling */
+.logo {
+    height: 50px;
+    margin-right: 15px; /* Adjust logo spacing */
+}
+
+/* Optional: Rotate chevron for dropdown */
+.nav-link[aria-expanded="true"] i {
+    transform: rotate(180deg);
+}
+
+/* Remove default list styles in sidebar */
+.nav-item ul {
+    list-style: none; /* Remove bullet points */
+    padding-left: 0; /* Remove left padding */
+}
+
+.nav-item .collapse {
+    padding-left: 20px;
+}
+
+    .nav-item .collapse .nav-link {
+        text-decoration: none;
+    }
