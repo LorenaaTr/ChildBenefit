@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Tema.Models;
 
 namespace tema.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) 
         {
@@ -19,9 +20,14 @@ namespace tema.Data
         public DbSet<Region> Regions { get; set; }
         public DbSet<Relation> Relations { get; set; }
         public DbSet<Bank> Banks { get; set; }
+        public DbSet<Status> Statuses { get; set; }
+        public DbSet<Parent> Parents { get; set; }
+        public DbSet<Child> Children { get; set; }
+        public DbSet<Case> Case { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Gender>().HasData(
                 new Gender { Id = 1, AlDescription = "Femer", EnDescription = "Female", SrDescription = "Zensko" },
                 new Gender { Id = 2, AlDescription = "Mashkull", EnDescription = "Male", SrDescription = "Muski" },
@@ -84,6 +90,11 @@ namespace tema.Data
                new Bank { Id = 7, BankName = "Ziraat Bank", AkronimiBankes = "ZIRAAT" },
                new Bank { Id = 8, BankName = "Komercijalna Banka", AkronimiBankes = "KB" }
            );
+            modelBuilder.Entity<Status>().HasData(
+                new Status { Id = 1, AlDescription = "Aktiv", EnDescription = "Active", SrDescription = "Aktivan" },
+                new Status { Id = 2, AlDescription = "Pasiv", EnDescription = "Passive", SrDescription = "Pasivni" },
+                new Status { Id = 3, AlDescription = "Nderprere", EnDescription = "Suspended", SrDescription = "Suspendovan" }
+                );
         }
        
     }

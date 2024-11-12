@@ -7,9 +7,9 @@ using Tema.Models;
 
 namespace Tema.DataAccess.Repository.IRepository
 {
-    public interface IStatusRepository : IRepository<Status>
+    public interface IGenderRepository : IRepository<Gender>
     {
-        void Update(Status obj);
+        void Update(Gender obj);
         void Save();
     }
 }

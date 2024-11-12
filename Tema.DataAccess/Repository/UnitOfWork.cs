@@ -20,6 +20,8 @@ namespace Tema.DataAccess.Repository
         public IRelationRepository Relation { get; private set; }
         public INationalityRepository Nationality { get; private set; }
         public IBankRepository Bank { get; private set; }
+        public IStatusRepository Status { get; private set; }
+
 
 
         public UnitOfWork(ApplicationDbContext db) 
@@ -34,6 +36,7 @@ namespace Tema.DataAccess.Repository
             Relation = new RelationRepository(_db);
             Nationality = new NationalityRepository(_db);
             Bank = new BankRepository(_db);
+            Status = new StatusRepository(_db);
         }
 
         public void Save()
