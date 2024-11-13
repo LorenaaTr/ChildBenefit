@@ -1,3 +1,11 @@
+/* Base HTML styling */
+html, body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
 html {
     font-size: 14px;
 }
@@ -8,21 +16,22 @@ html {
     }
 }
 
+/* Body padding adjustments */
 body {
-    margin-bottom: 60px; /* Ensure space for the footer */
-    margin-top: 60px; /* Ensure space for the navbar */
+    padding-top: 60px; /* Ensure space for the navbar */
+    margin: 0;
 }
 
 /* Sidebar styling */
 .sidebar {
     position: fixed;
-    top: 60px; /* Adjusted to align the sidebar below the navbar */
+    top: 60px; /* Align the sidebar below the navbar */
     left: 0;
     width: 250px;
     height: calc(100vh - 60px); /* Full height minus navbar height */
     background-color: #d3d3d3; /* Light grey color */
     padding-right: 10px;
-    padding-top: 20px; /* Adjust for top space from navbar */
+    padding-top: 20px; /* Top space from navbar */
     z-index: 999; /* Ensure sidebar stays below navbar */
 }
 
@@ -40,9 +49,10 @@ body {
 
 /* Main content area */
 .main-content {
-    margin-left: 250px; /* Make space for the sidebar */
+    flex: 1; /* Fills available space between header and footer */
+    margin-left: 250px; /* Space for the sidebar */
     padding: 20px;
-    margin-top: 60px; /* Ensure content doesn't hide behind navbar */
+    padding-top: 20px; /* Adjust to align content with sidebar */
 }
 
 /* Navbar styling */
@@ -57,17 +67,16 @@ nav.navbar {
 }
 
 /* Footer styling */
-footer {
-    position: relative;
+footer.footer {
     background-color: #0d6efd;
     color: white;
-    padding: 10px;
     text-align: center;
+    padding: 5px; /* Thinner padding for a slim footer */
 }
 
 /* Logo styling */
 .logo {
-    height: 50px;
+    height: 30px;
     margin-right: 15px; /* Adjust logo spacing */
 }
 

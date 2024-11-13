@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - tema</title>
+    <title>@ViewData["Title"] - Tema</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/tema.styles.css" asp-append-version="true" />
@@ -14,106 +14,122 @@
 <body>
     <header>
         <!-- Navbar at the top with logo and profile options -->
-        <nav class="navbar navbar-expand-lg bg-primary btn-outline-info" data-bs-theme="dark">
+        <nav class="navbar navbar-expand-lg bg-primary navbar-dark">
             <div class="container-fluid">
                 <!-- Logo and SIDPSF text -->
                 <a class="navbar-brand d-flex align-items-center" href="#">
-                    <img src="/img/logo.png" alt="Logo" class="logo me-2" style="border-left: 4px solid white; padding-left: 10px;" />
+                    <img src="/img/logo.png" alt="Logo" class="logo me-2" style="border-left: 3px solid white; padding-left: 10px;" />
                     <span class="text-white">SIDPSF</span>
                 </a>
 
-                <!-- Right side of the navbar for login/register buttons -->
-                <div class="d-flex ms-auto">
-                    @await Html.PartialAsync("_LoginPartial")
+                <!-- Navbar toggler for smaller screens -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Collapsible Navbar Links -->
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    @if (User.IsInRole(SD.Role_User))
+                  {
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-5">
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="User" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="User" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+                    </ul>
+                    }
+                    <!-- Right side of the navbar for login/register buttons -->
+                    <div class="d-flex ms-auto">
+                        @await Html.PartialAsync("_LoginPartial")
+                    </div>
                 </div>
             </div>
         </nav>
     </header>
 
-    <!-- Sidebar -->
-    <aside class="sidebar bg-primary text-light">
-        <ul class="nav flex-column">
-            <li class="nav-item">
-                <a class="nav-link text-light" asp-area="User" asp-controller="Home" asp-action="Index">Home</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-light" asp-area="User" asp-controller="Home" asp-action="Privacy">Privacy</a>
-            </li>
-
-            <!-- Dropdown for Detajet -->
-            <li class="nav-item">
-                <a class="nav-link text-light" href="#" data-bs-toggle="collapse" data-bs-target="#detajetDropdown" aria-expanded="false" aria-controls="detajetDropdown">
-                    Regjistrat <i class="bi bi-chevron-down"></i>
-                </a>
-                <ul class="collapse" id="detajetDropdown">
-                    <li class="nav-item">
-                        <a class="nav-link text-light d-flex align-items-center" asp-area="Admin" asp-controller="Gender" asp-action="Index">
-                            <i class="bi bi-gender-ambiguous me-2"></i>
-                            Gjinia
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-light" asp-area="Admin" asp-controller="Country" asp-action="Index">
-                            <i class="bi bi-flag me-2"></i>
-                            Shteti
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-light" asp-area="Admin" asp-controller="Criteria" asp-action="Index">
-                            <i class="bi bi-list-check me-2"></i>
-                            Kriteri
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-light" asp-area="Admin" asp-controller="Language" asp-action="Index">
-                            <i class="bi bi-translate me-2"></i>
-                            Gjuha
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-light" asp-area="Admin" asp-controller="MaritalStatus" asp-action="Index">
-                            <i class="bi bi-person-heart me-2"></i>
-                            Statusi Martesor
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-light" asp-area="Admin" asp-controller="Region" asp-action="Index">
-                            <i class="bi bi-geo-alt  me-2"></i>
-                            Regjioni
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-light" asp-area="Admin" asp-controller="Relation" asp-action="Index">
-                            <i class="bi bi-heart  me-2"></i>
-                            Relcioni
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-light" asp-area="Admin" asp-controller="Nationality" asp-action="Index">
-                            <i class="bi bi-person-bounding-box me-2"></i>
-                            Nacionaliteti
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-light" asp-area="Admin" asp-controller="Banka" asp-action="Index">
-                            <i class="bi bi-bank me-2"></i>
-                            Bank
-                        </a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-    </aside>
+    @if (User.IsInRole(SD.Role_Admin))
+    {
+        <!-- Sidebar -->
+        <aside class="sidebar bg-primary text-light position-fixed vh-100">
+            <ul class="nav flex-column p-3">
+                <li class="nav-item mb-2">
+                    <a class="nav-link text-light" asp-area="User" asp-controller="Home" asp-action="Index">Back Home</a>
+                </li>
+                <!-- Dropdown for Detajet -->
+                <li class="nav-item">
+                    <a class="nav-link text-light d-flex justify-content-between align-items-center" href="#" data-bs-toggle="collapse" data-bs-target="#detajetDropdown" aria-expanded="false" aria-controls="detajetDropdown">
+                        Regjistrat <i class="bi bi-chevron-down"></i>
+                    </a>
+                    <ul class="collapse" id="detajetDropdown">
+                        <li class="nav-item">
+                            <a class="nav-link text-light d-flex align-items-center" asp-area="Admin" asp-controller="Gender" asp-action="Index">
+                                <i class="bi bi-gender-ambiguous me-2"></i> Gjinia
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light d-flex align-items-center" asp-area="Admin" asp-controller="Country" asp-action="Index">
+                                <i class="bi bi-flag me-2"></i> Shteti
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="Admin" asp-controller="Criteria" asp-action="Index">
+                                <i class="bi bi-list-check me-2"></i>
+                                Kriteri
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="Admin" asp-controller="Language" asp-action="Index">
+                                <i class="bi bi-translate me-2"></i>
+                                Gjuha
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="Admin" asp-controller="MaritalStatus" asp-action="Index">
+                                <i class="bi bi-person-heart me-2"></i>
+                                Statusi Martesor
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="Admin" asp-controller="Region" asp-action="Index">
+                                <i class="bi bi-geo-alt  me-2"></i>
+                                Regjioni
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="Admin" asp-controller="Relation" asp-action="Index">
+                                <i class="bi bi-heart  me-2"></i>
+                                Relcioni
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="Admin" asp-controller="Nationality" asp-action="Index">
+                                <i class="bi bi-person-bounding-box me-2"></i>
+                                Nacionaliteti
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="Admin" asp-controller="Banka" asp-action="Index">
+                                <i class="bi bi-bank me-2"></i>
+                                Bank
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </aside>
+    }
 
     <!-- Main content area adjusted for sidebar width -->
-    <div class="main-content">
+    <div class="main-content" style="margin-left: 200px; padding-top: 20px;">
         <main role="main" class="pb-3">
             <partial name="_Notification" />
             @RenderBody()
         </main>
     </div>
 
-    <footer class="footer bg-primary text-muted text-center">
+    <footer class="footer text-light bg-primary text-center py-2">
         &copy; 2024 - Shtesat e femijeve
     </footer>
 
