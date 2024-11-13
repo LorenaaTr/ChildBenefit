@@ -21,9 +21,10 @@
                     <img src="/img/logo.png" alt="Logo" class="logo me-2" style="border-left: 4px solid white; padding-left: 10px;" />
                     <span class="text-white">SIDPSF</span>
                 </a>
+
+                <!-- Right side of the navbar for login/register buttons -->
                 <div class="d-flex ms-auto">
-                    <!-- Placeholder for future profile and logout options -->
-                    <a href="#" class="btn ms-2">Logout</a>
+                    @await Html.PartialAsync("_LoginPartial")
                 </div>
             </div>
         </nav>
