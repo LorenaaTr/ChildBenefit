@@ -2,82 +2,130 @@
 @model LoginModel
 
 @{
+    Layout = null; // This removes the layout, hence no header or footer will be included.
     ViewData["Title"] = "Log in";
 }
 
-<h1>@ViewData["Title"]</h1>
-<div class="row">
-    <div class="col-md-4">
-        <section>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - YourAppName</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <style>
+        /* Ensure the body and html take full height and center content */
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0; /* Ensure no default padding */
+        }
+
+        /* Form Container */
+        .form-container {
+            border: 2px solid grey; /* Add grey border */
+            border-radius: 8px; /* Rounded corners for the form */
+            width: 100%;
+            min-width: 400px; /* Minimum width to prevent it from becoming too narrow */
+            max-width: 500px; /* Set max-width for the form */
+            margin: 0 auto; /* Ensure it's centered */
+        }
+
+        /* Logo Section */
+        .logo-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px; /* Adjust padding inside the logo container */
+            border-radius: 8px 8px 0 0; /* Rounded corners on top */
+        }
+
+            .logo-container img {
+                height: 60px;
+                width: 60px;
+            }
+
+            .logo-container .text-white {
+                flex-grow: 1;
+                text-align: center;
+                font-size: 1.5rem;
+            }
+
+        /* Form Inputs */
+        .form-container form {
+            padding: 30px; /* Padding for form content */
+        }
+
+        .form-floating {
+            width: 100%; /* Ensure form inputs take full width */
+        }
+
+            .form-floating input {
+                width: 100%; /* Ensure form inputs fill the container */
+            }
+
+        /* Button Styling */
+        .btn {
+            width: 100%; /* Make sure the login button takes full width */
+        }
+
+        .checkbox input {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+        <section class="form-container">
+            <!-- Logo Section: Kosovo's logo on the left, SIDPSF logo on the right -->
+            <div class="logo-container bg-primary">
+                <!-- Kosovo Logo -->
+                <img src="/img/stema.png" alt="Kosovo Logo" />
+                <!-- SIDPSF Logo -->
+                <a class="navbar-brand d-flex align-items-center" href="#">
+                    <img src="/img/logo.png" alt="Logo" class="logo me-2" style="border-left: 3px solid white; padding-left: 10px;" />
+                    <span class="text-white">SIDPSF</span>
+                </a>
+            </div>
+
+            <!-- Form Section -->
             <form id="account" method="post">
-                <h2>Use a local account to log in.</h2>
-                <hr />
                 <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
+                <!-- Email Input -->
                 <div class="form-floating mb-3">
                     <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
                     <label asp-for="Input.Email" class="form-label">Email</label>
                     <span asp-validation-for="Input.Email" class="text-danger"></span>
                 </div>
+
+                <!-- Password Input -->
                 <div class="form-floating mb-3">
                     <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="password" />
                     <label asp-for="Input.Password" class="form-label">Password</label>
                     <span asp-validation-for="Input.Password" class="text-danger"></span>
                 </div>
+
+                <!-- Remember Me Checkbox -->
                 <div class="checkbox mb-3">
                     <label asp-for="Input.RememberMe" class="form-label">
                         <input class="form-check-input" asp-for="Input.RememberMe" />
                         @Html.DisplayNameFor(m => m.Input.RememberMe)
                     </label>
                 </div>
+
+                <!-- Submit Button -->
                 <div>
                     <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
-                </div>
-                <div>
-                    <p>
-                        <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
-                    </p>
-                    <p>
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
-                    </p>
-                    <p>
-                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
-                    </p>
                 </div>
             </form>
         </section>
     </div>
-    <div class="col-md-6 col-md-offset-2">
-        <section>
-            <h3>Use another service to log in.</h3>
-            <hr />
-            @{
-                if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                {
-                    <div>
-                        <p>
-                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article
-                            about setting up this ASP.NET application to support logging in via external services</a>.
-                        </p>
-                    </div>
-                }
-                else
-                {
-                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                        <div>
-                            <p>
-                                @foreach (var provider in Model.ExternalLogins!)
-                                {
-                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                }
-                            </p>
-                        </div>
-                    </form>
-                }
-            }
-        </section>
-    </div>
-</div>
 
-@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <partial name="_ValidationScriptsPartial" />
-}
+</body>
+</html>
