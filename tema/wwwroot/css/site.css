@@ -1,11 +1,12 @@
 /* Base HTML styling */
 html, body {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+    height: 100%; /* Ensure full height for the entire page */
     margin: 0;
+    display: flex;
+    flex-direction: column; /* Stack the content vertically */
 }
 
+/* Adjust font size for responsiveness */
 html {
     font-size: 14px;
 }
@@ -18,7 +19,9 @@ html {
 
 /* Body padding adjustments */
 body {
-    padding-top: 60px; /* Ensure space for the navbar */
+    display: flex;
+    flex-direction: column; /* Ensure column layout */
+    min-height: 100vh; /* Ensure the body takes up the entire height of the viewport */
     margin: 0;
 }
 
@@ -49,15 +52,16 @@ body {
 
 /* Main content area */
 .main-content {
-    flex: 1; /* Fills available space between header and footer */
-    margin-left: 250px; /* Space for the sidebar */
+    flex-grow: 1; /* Fills available space between header and footer */
     padding: 20px;
-    padding-top: 20px; /* Adjust to align content with sidebar */
+    margin-top: 60px;
+    overflow: auto; /* Ensure content scrolls if it's too long */
+   
 }
 
 /* Navbar styling */
 nav.navbar {
-    position: fixed;
+    position: fixed; 
     top: 0;
     left: 0;
     width: 100%;
@@ -71,7 +75,10 @@ footer.footer {
     background-color: #0d6efd;
     color: white;
     text-align: center;
-    padding: 5px; /* Thinner padding for a slim footer */
+    padding: 5px;
+    margin-top: auto; /* Pushes the footer to the bottom */
+    width: 100%;
+    position: relative;
 }
 
 /* Logo styling */
@@ -98,3 +105,8 @@ footer.footer {
     .nav-item .collapse .nav-link {
         text-decoration: none;
     }
+
+/* Optional: Additional content styling */
+.content {
+    margin-left: 60px;
+}
