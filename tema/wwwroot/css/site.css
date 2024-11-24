@@ -1,12 +1,9 @@
-/* Base HTML styling */
 html, body {
-    height: 100%; /* Ensure full height for the entire page */
+    height: 100%;  
     margin: 0;
     display: flex;
-    flex-direction: column; /* Stack the content vertically */
-}
+    flex-direction: column;  
 
-/* Adjust font size for responsiveness */
 html {
     font-size: 14px;
 }
@@ -17,85 +14,66 @@ html {
     }
 }
 
-/* Body padding adjustments */
 body {
     display: flex;
-    flex-direction: column; /* Ensure column layout */
-    min-height: 100vh; /* Ensure the body takes up the entire height of the viewport */
+    flex-direction: column;  
+    min-height: 100vh;  
     margin: 0;
 }
 
-/* Sidebar styling */
 .sidebar {
     position: fixed;
-    top: 60px; /* Align the sidebar below the navbar */
+    top: 60px;  
     left: 0;
     width: 250px;
-    height: calc(100vh - 60px); /* Full height minus navbar height */
-    background-color: #d3d3d3; /* Light grey color */
+    height: calc(100vh - 60px);  
+    background-color: #d3d3d3;  
     padding-right: 10px;
-    padding-top: 20px; /* Top space from navbar */
-    z-index: 999; /* Ensure sidebar stays below navbar */
+    padding-top: 20px;  
+    z-index: 999;  
 }
 
-    /* Sidebar links */
     .sidebar a {
-        color: #333; /* Dark text color */
+        color: #333;  Dark text color 
         padding: 10px 15px;
         text-decoration: none;
         display: block;
     }
 
         .sidebar a:hover {
-            background-color: #a9a9a9; /* Darker grey on hover */
+            background-color: #a9a9a9;  
         }
 
-/* Main content area */
 .main-content {
-    flex-grow: 1; /* Fills available space between header and footer */
-    padding: 20px;
-    margin-top: 60px;
-    overflow: auto; /* Ensure content scrolls if it's too long */
-   
+    flex-grow: 1;
+    overflow: auto;
 }
 
-/* Navbar styling */
 nav.navbar {
     position: fixed; 
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 1000; /* Ensure navbar stays above sidebar */
-    background-color: #0d6efd; /* Blue color for navbar */
-    padding: 15px; /* Adjust padding for better appearance */
+    z-index: 1000;  
+    background-color: #0d6efd;  
+    padding: 15px;  
 }
 
-/* Footer styling */
-footer.footer {
-    background-color: #0d6efd;
-    color: white;
-    text-align: center;
-    padding: 5px;
-    margin-top: auto; /* Pushes the footer to the bottom */
-    width: 100%;
-    position: relative;
-}
 
-/* Logo styling */
+
 .logo {
     height: 30px;
-    margin-right: 15px; /* Adjust logo spacing */
+    margin-right: 15px;  
 }
-
-/* Optional: Rotate chevron for dropdown */
+ 
 .nav-link[aria-expanded="true"] i {
     transform: rotate(180deg);
 }
 
-/* Remove default list styles in sidebar */
+
 .nav-item ul {
-    list-style: none; /* Remove bullet points */
-    padding-left: 0; /* Remove left padding */
+    list-style: none;  
+    padding-left: 0;  
 }
 
 .nav-item .collapse {
@@ -106,7 +84,66 @@ footer.footer {
         text-decoration: none;
     }
 
-/* Optional: Additional content styling */
 .content {
-    margin-left: 60px;
+    margin-left: 270px;
+    padding-top: 70px;
+    margin-right:20px;
 }
+
+.image {
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+/* Teksti sipër heros */
+.hero-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #fff; /* Ngjyra e bardhë për kontrast */
+}
+
+    .hero-text h1 {
+        font-size: 3rem;
+        font-weight: bold;
+        margin: 0;
+    }
+
+    .hero-text h3 {
+        font-size: 1.5rem;
+        margin: 10px 0 0;
+    }
+
+.cont {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: flex-start; /* Align at the top, can change to center */
+    background-color: #f4f4f4; /* Background color for the body */
+}
+
+.home-container {
+    width: 100%;
+    max-width: 1100px; /* Limit max width to create space */
+    margin: 0 20px; /* Add space on left and right */
+    padding: 20px;
+    background-color: white;
+}
+
+/* Style for content inside the home-container */
+section {
+    padding: 20px;
+}
+
+/* Accordion Styles (Optional: Keep as is for accordion functionality) */
+.accordion-button {
+    font-size: 1rem;
+    padding: 10px;
+    text-align: left;
+}
+
+
+
+

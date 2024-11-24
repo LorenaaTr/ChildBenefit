@@ -36,7 +36,7 @@
                             <a class="nav-link text-light" asp-area="User" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="User" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-light" asp-area="User" asp-controller="Home" asp-action="Privacy">Contact Us</a>
                         </li>
                     </ul>
                     }
@@ -122,16 +122,20 @@
     }
 
     <!-- Main content area adjusted for sidebar width -->
-    <div class="main-content" style="margin-left: 200px; padding-top: 20px;">
+    <div class="main-content" >
         <main role="main" class="pb-3">
             <partial name="_Notification" />
             @RenderBody()
         </main>
     </div>
-
-    <footer class="footer text-light bg-primary text-center py-2">
+ @if (User.IsInRole(SD.Role_User))
+    {
+       <footer class="text-light bg-primary text-center p-3" >
         &copy; 2024 - Shtesat e femijeve
-    </footer>
+        </footer>
+
+    }
+
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
