@@ -16,16 +16,11 @@ namespace tema.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            List<Child> objChildList = _unitOfWork.Child.GetAll().ToList();
+            List<Child> objChildList = _unitOfWork.Child.GetAll(includeProperties: "Status,Relation").ToList();
             return View(objChildList);
         }
         public IActionResult Create()
         {
-            //IEnumerable<SelectListItem> StatusList = _unitOfWork.Status.GetAll().Select(u => new SelectListItem
-            //{
-            //    Text = u.AlDescription,
-            //    Value = u.Id.ToString()
-            //});
             ChildVM childVM = new()
             {
                 RelationList = _unitOfWork.Relation.GetAll().Select(u => new SelectListItem

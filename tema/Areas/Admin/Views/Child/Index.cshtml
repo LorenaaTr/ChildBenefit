@@ -37,9 +37,9 @@
                         <td>@obj.Name</td>
                         <td>@obj.Surname</td>
                         <td>@obj.PersonalNo</td>
-                        <td>@obj.DateOfBirth</td>
-                        <td>@obj.Relation</td>
-                        <td>@obj.Status</td>
+                        <td>@obj.DateOfBirth.ToString("dd/MM/yyyy")</td>
+                        <td>@obj.Relation.AlDescription</td>
+                        <td>@obj.Status.AlDescription</td>
                         <td>
                             <div class="w-75 btn-group" role="group">
                                 <a asp-controller="Child" asp-action="Edit" asp-route-id="@obj.IdChild" class="btn btn-primary mx-2">
