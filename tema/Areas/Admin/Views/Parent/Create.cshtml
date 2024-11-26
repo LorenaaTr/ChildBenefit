@@ -1,0 +1,141 @@
+﻿@model ParentVM
+
+<div class="card shadow border-0 mt-4 content">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-primary">Shto Prind</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post" class="row">
+            <div class="border p-3">
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Parent.Name" type="text" class="form-control border-0 shadow" />
+                    <label asp-for="Parent.Name" class="ms-2">Emri</label>
+                    <span asp-validation-for="Parent.Name" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Parent.Surname" type="text" class="form-control border-0 shadow" />
+                    <label asp-for="Parent.Surname" class="ms-2">Mbiemri</label>
+                    <span asp-validation-for="Parent.Surname" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Parent.MaidenName" type="text" class="form-control border-0 shadow" />
+                    <label asp-for="Parent.MaidenName" class="ms-2">Mbiemri Vajzeris</label>
+                    <span asp-validation-for="Parent.MaidenName" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Parent.PersonalNo" type="text" class="form-control border-0 shadow" />
+                    <label asp-for="Parent.PersonalNo" class="ms-2">Numri Personal</label>
+                    <span asp-validation-for="Parent.PersonalNo" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Parent.DateOfBirth" type="date" class="form-control border-0 shadow" />
+                    <label asp-for="Parent.DateOfBirth" class="ms-2">Ditelindja</label>
+                    <span asp-validation-for="Parent.DateOfBirth" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Parent.Address" type="text" class="form-control border-0 shadow" />
+                    <label asp-for="Parent.Address" class="ms-2">Adresa</label>
+                    <span asp-validation-for="Parent.Address" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Parent.Email" type="text" class="form-control border-0 shadow" />
+                    <label asp-for="Parent.Email" class="ms-2">Email</label>
+                    <span asp-validation-for="Parent.Email" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Parent.ContactNumber" type="text" class="form-control border-0 shadow" />
+                    <label asp-for="Parent.ContactNumber" class="ms-2">Numri Telefonit</label>
+                    <span asp-validation-for="Parent.ContactNumber" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <select asp-for="@Model.Parent.RelationId" asp-items="@Model.RelationList" class="form-select border-0 shadow">
+                       <option disabled selected>-Zgjedh Relacionin-</option>
+                   </select>
+                    <label asp-for="Parent.RelationId" class="ms-2">Relacioni</label>
+                    <span asp-validation-for="Parent.RelationId" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <select asp-for="@Model.Parent.GenderId" asp-items="@Model.GenderList" class="form-select border-0 shadow">
+                        <option disabled selected>-Zgjedh Gjinin-</option>
+                    </select>
+                    <label asp-for="Parent.GenderId" class="ms-2">Gjinia</label>
+                    <span asp-validation-for="Parent.GenderId" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <select asp-for="@Model.Parent.MaritalStatusId" asp-items="@Model.MaritalStatusList" class="form-select border-0 shadow">
+                        <option disabled selected>-Zgjedh StatusinMartesor-</option>
+                    </select>
+                    <label asp-for="Parent.MaritalStatusId" class="ms-2">Statusi Martesor</label>
+                    <span asp-validation-for="Parent.MaritalStatusId" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <select asp-for="@Model.Parent.LanguageId" asp-items="@Model.LanguageList" class="form-select border-0 shadow">
+                        <option disabled selected>-Zgjedh Gjuhen-</option>
+                    </select>
+                    <label asp-for="Parent.LanguageId" class="ms-2">Gjuha</label>
+                    <span asp-validation-for="Parent.LanguageId" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <select asp-for="@Model.Parent.NationalityId" asp-items="@Model.NationalityList" class="form-select border-0 shadow">
+                        <option disabled selected>-Zgjedh Nacionalitetin-</option>
+                    </select>
+                    <label asp-for="Parent.NationalityId" class="ms-2">nacionaliteti</label>
+                    <span asp-validation-for="Parent.NationalityId" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <select asp-for="@Model.Parent.RegionId" asp-items="@Model.RegionList" class="form-select border-0 shadow">
+                        <option disabled selected>-Zgjedh Regjionin-</option>
+                    </select>
+                    <label asp-for="Parent.RegionId" class="ms-2">Regjioni</label>
+                    <span asp-validation-for="Parent.RegionId" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <select asp-for="@Model.Parent.CountryId" asp-items="@Model.CountryList" class="form-select border-0 shadow">
+                        <option disabled selected>-Zgjedh Shtetin-</option>
+                    </select>
+                    <label asp-for="Parent.CountryId" class="ms-2">Shteti</label>
+                    <span asp-validation-for="Parent.CountryId" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <select asp-for="@Model.Parent.BankId" asp-items="@Model.BankList" class="form-select border-0 shadow">
+                        <option disabled selected>-Zgjedh Banken-</option>
+                    </select>
+                    <label asp-for="Parent.BankId" class="ms-2">Banka</label>
+                    <span asp-validation-for="Parent.BankId" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Parent.BankAccountNumber" type="text" class="form-control border-0 shadow" />
+                    <label asp-for="Parent.BankAccountNumber" class="ms-2">Xhirollogaria</label>
+                    <span asp-validation-for="Parent.BankAccountNumber" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <select asp-for="@Model.Parent.CriteriaId" asp-items="@Model.CriteriaList" class="form-select border-0 shadow">
+                        <option disabled selected>-Zgjedh Kriterin-</option>
+                    </select>
+                    <label asp-for="Parent.CriteriaId" class="ms-2">Kriteri</label>
+                    <span asp-validation-for="Parent.CriteriaId" class="text-danger"></span>
+                </div>
+                <div class="row pt-2">
+                    <div class="col-6 col-md-3">
+                        <button type="submit" class="btn btn-primary form-control">Shto</button>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-controller="Parent" asp-action="Index" class="btn btn-outline-primary form-control border">Kthehu Prapa</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts{
+    @{
+    <partial name="_ValidationScriptsPartial"/>
+    }
+}
