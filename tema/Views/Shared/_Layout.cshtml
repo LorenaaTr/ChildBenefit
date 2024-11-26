@@ -117,6 +117,18 @@
                         </li>
                     </ul>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light d-flex justify-content-between align-items-center" href="#" data-bs-toggle="collapse" data-bs-target="#detajetDropdown" aria-expanded="false" aria-controls="detajetDropdown">
+                        Menaxhim <i class="bi bi-chevron-down"></i>
+                    </a>
+                    <ul class="collapse" id="detajetDropdown">
+                        <li class="nav-item">
+                            <a class="nav-link text-light d-flex align-items-center" asp-area="Admin" asp-controller="Child" asp-action="Index">
+                                <i class="bi bi-gender-ambiguous me-2"></i> Femijet
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </aside>
     }
@@ -128,6 +140,7 @@
             @RenderBody()
         </main>
     </div>
+
  @if (User.IsInRole(SD.Role_User))
     {
        <footer class="text-light bg-primary text-center p-3" >

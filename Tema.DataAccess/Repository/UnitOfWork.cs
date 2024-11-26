@@ -21,6 +21,7 @@ namespace Tema.DataAccess.Repository
         public INationalityRepository Nationality { get; private set; }
         public IBankRepository Bank { get; private set; }
         public IStatusRepository Status { get; private set; }
+        public IChildRepository Child { get; private set; }
 
 
 
@@ -37,6 +38,7 @@ namespace Tema.DataAccess.Repository
             Nationality = new NationalityRepository(_db);
             Bank = new BankRepository(_db);
             Status = new StatusRepository(_db);
+            Child = new ChildRepository(_db);
         }
 
         public void Save()

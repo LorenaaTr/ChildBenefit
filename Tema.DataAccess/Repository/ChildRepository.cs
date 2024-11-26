@@ -5,10 +5,10 @@ using Tema.Models;
 
 namespace Tema.DataAccess.Repository
 {
-    public class GenderRepository : Repository<Gender>, IGenderRepository
+    public class ChildRepository : Repository<Child>, IChildRepository
     {
         private ApplicationDbContext _db;
-        public GenderRepository(ApplicationDbContext db) : base(db)
+        public ChildRepository(ApplicationDbContext db) : base(db)
         {
             _db = db;
         }
@@ -17,9 +17,9 @@ namespace Tema.DataAccess.Repository
             _db.SaveChanges();
         }
 
-        public void Update(Gender obj)
+        public void Update(Child obj)
         {
-            _db.Genders.Update(obj); 
+            _db.Children.Update(obj); 
         }
     }
 }

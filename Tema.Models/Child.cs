@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -28,15 +29,17 @@ namespace Tema.Models
         [MaxLength(10)]
         public string PersonalNo { get; set; }
 
-        [Required]
+  
         public DateTime ApplicationDate { get; set; }
 
         public int StatusId { get; set; }
         [ForeignKey("StatusId")]
+        [ValidateNever]
         public Status Status { get; set; }
 
         public int RelationId { get; set; }
         [ForeignKey("RelationId")]
+        [ValidateNever]
         public Relation Relation { get; set; }
 
     }

@@ -18,6 +18,7 @@ namespace Tema.DataAccess.Repository.IRepository
         IRelationRepository Relation { get; }
         IBankRepository Bank { get; }
         IStatusRepository Status { get; }
+        IChildRepository Child { get; }
         void Save();
     }
 }

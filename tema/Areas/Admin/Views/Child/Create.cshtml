@@ -1,0 +1,67 @@
+﻿@model ChildVM
+
+<div class="card shadow border-0 mt-4 content">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-primary">Shto Femije</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post" class="row">
+            <div class="border p-3">
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Child.Name" type="text" class="form-control border-0 shadow" />
+                    <label asp-for="Child.Name" class="ms-2">Emri</label>
+                    <span asp-validation-for="Child.Name" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Child.Surname" type="text" class="form-control border-0 shadow" />
+                    <label asp-for="Child.Surname" class="ms-2">Mbiemri</label>
+                    <span asp-validation-for="Child.Surname" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Child.PersonalNo" type="text" class="form-control border-0 shadow" />
+                    <label asp-for="Child.PersonalNo" class="ms-2">Numri Personal</label>
+                    <span asp-validation-for="Child.PersonalNo" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Child.DateOfBirth" type="date" class="form-control border-0 shadow" />
+                    <label asp-for="Child.DateOfBirth" class="ms-2">Ditelindja</label>
+                    <span asp-validation-for="Child.DateOfBirth" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <select asp-for="@Model.Child.RelationId" asp-items="@Model.RelationList" class="form-select border-0 shadow">
+                       <option disabled selected>-Zgjedh Relacionin-</option>
+                   </select>
+                    <label asp-for="Child.RelationId" class="ms-2">Ditelindja</label>
+                    <span asp-validation-for="Child.RelationId" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <select asp-for="@Model.Child.StatusId" asp-items="@Model.StatusList" class="form-select border-0 shadow">
+                        <option disabled selected>-Zgjedh Relacionin-</option>
+                    </select>
+                    <label asp-for="Child.StatusId" class="ms-2">Ditelindja</label>
+                    <span asp-validation-for="Child.StatusId" class="text-danger"></span>
+                </div>
+                <div class="row pt-2">
+                    <div class="col-6 col-md-3">
+                        <button type="submit" class="btn btn-primary form-control">Shto</button>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-controller="Child" asp-action="Index" class="btn btn-outline-primary form-control border">Kthehu Prapa</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts{
+    @{
+    <partial name="_ValidationScriptsPartial"/>
+    }
+}
