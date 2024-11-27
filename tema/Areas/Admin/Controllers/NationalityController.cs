@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using tema.Data;
+using Tema.DataAccess.Repository;
 using Tema.DataAccess.Repository.IRepository;
 using Tema.Models;
 
@@ -61,34 +62,27 @@ namespace tema.Areas.Admin.Controllers
             return View();
         }
 
+        #region API CALLS
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            List<Nationality> objNationalityList = _unitOfWork.Nationality.GetAll().ToList();
+            return Json(new { data = objNationalityList });
+        }
 
+        [HttpDelete]
         public IActionResult Delete(int? id)
         {
-            if (id == null || id == 0)
+            var nationalityToBeDeleted = _unitOfWork.Nationality.Get(u => u.Id == id);
+            if (nationalityToBeDeleted == null)
             {
-                return NotFound();
-            }
-            Nationality? nationalityFromDb = _unitOfWork.Nationality.Get(u => u.Id == id);
-            if (nationalityFromDb == null)
-            {
-                return NotFound();
-            }
-            return View(nationalityFromDb);
-        }
-        [HttpPost, ActionName("Delete")]
-        public IActionResult DeletePOST(int? id)
-        {
-            Nationality? obj = _unitOfWork.Nationality.Get(u => u.Id == id);
-            if (obj == null)
-            {
-                return NotFound();
+                return Json(new { success = false, message = "Error while deleting" });
             }
 
-            _unitOfWork.Nationality.Remove(obj);
+            _unitOfWork.Nationality.Remove(nationalityToBeDeleted);
             _unitOfWork.Save();
-            TempData["success"] = "Nacionaliteti eshte fshire me sukses";
-            return RedirectToAction("Index");
-
+            return Json(new { success = true, message = "Delete Successful " });
         }
+        #endregion
     }
 }
