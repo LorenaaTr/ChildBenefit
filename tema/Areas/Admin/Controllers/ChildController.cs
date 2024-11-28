@@ -47,7 +47,8 @@ namespace tema.Areas.Admin.Controllers
                 TempData["success"] = "Femija eshte krijuar me sukses";
                 return RedirectToAction("Index");
             }
-            else {
+            else
+            {
                 childVM.RelationList = _unitOfWork.Relation.GetAll().Select(u => new SelectListItem
                 {
                     Text = u.AlDescription,
@@ -60,7 +61,7 @@ namespace tema.Areas.Admin.Controllers
                 });
                 return View(childVM);
             }
-          
+
         }
 
         public IActionResult Edit(int? id)
@@ -89,34 +90,27 @@ namespace tema.Areas.Admin.Controllers
             return View();
         }
 
+        #region API CALLS
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            List<Child> objChildList = _unitOfWork.Child.GetAll(includeProperties: "Relation,Status").ToList();
+            return Json(new { data = objChildList });
+        }
 
+        [HttpDelete]
         public IActionResult Delete(int? id)
         {
-            if (id == null || id == 0)
+            var ChildToBeDeleted = _unitOfWork.Child.Get(u => u.IdChild == id);
+            if (ChildToBeDeleted == null)
             {
-                return NotFound();
-            }
-            Child? genderFromDb = _unitOfWork.Child.Get(u => u.IdChild == id);
-            if (genderFromDb == null)
-            {
-                return NotFound();
-            }
-            return View(genderFromDb);
-        }
-        [HttpPost, ActionName("Delete")]
-        public IActionResult DeletePOST(int? id)
-        {
-            Child? obj = _unitOfWork.Child.Get(u => u.IdChild == id);
-            if (obj == null)
-            {
-                return NotFound();
+                return Json(new { success = false, message = "Error while deleting" });
             }
 
-            _unitOfWork.Child.Remove(obj);
+            _unitOfWork.Child.Remove(ChildToBeDeleted);
             _unitOfWork.Save();
-            TempData["success"] = "Femija eshte fshire me sukses";
-            return RedirectToAction("Index");
-
+            return Json(new { success = true, message = "Femija eshte fshire me sukses! " });
         }
+        #endregion
     }
 }

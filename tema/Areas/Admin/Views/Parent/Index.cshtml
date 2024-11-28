@@ -18,7 +18,7 @@
                 </a>
             </div>
         </div>
-        <table class="table table-bordered table-striped">
+        <table id="tblData3" class="table table-bordered table-striped">
             <thead>
                 <tr>
                     <th>Emri</th>
@@ -26,39 +26,13 @@
                     <th>Mbiemri Vajzeris</th>
                     <th>Nr Personal</th>
                     <th>Ditelindja</th>
-                    <th>Relacioni</th>
                     <th>Gjinia</th>
                     <th> </th>
                 </tr>
             </thead>
-            <tbody>
-                @foreach (var obj in Model)
-                {
-                    <tr>
-                        <td>@obj.Name</td>
-                        <td>@obj.Surname</td>
-                        <td>@obj.MaidenName</td>
-                        <td>@obj.PersonalNo</td>
-                        <td>@obj.DateOfBirth.ToString("dd/MM/yyyy")</td>
-                        <td>@obj.Relation.AlDescription</td>
-                        <td>@obj.Gender.AlDescription</td>
-                        <td>
-                            <div class="w-75 btn-group" role="group">
-                                <a asp-controller="Parent" asp-action="Edit" asp-route-id="@obj.IdParent" class="btn btn-primary mx-2">
-                                    <i class="bi bi-pencil-square"></i>Edit
-                                </a>
-                                <a asp-controller="Parent" asp-action="Delete" asp-route-id="@obj.IdParent" method="post" class="btn btn-danger mx-2">
-                                    <i class="bi bi-trash-fill"></i>Delete
-                                </a>
-                                <a asp-controller="Parent" asp-action="ViewDetails" asp-route-id="@obj.IdParent" class="btn btn-info mx-2">
-                                    <i class="bi bi-eye"></i> View
-                                </a>
-
-                            </div>
-                        </td>
-                    </tr>
-                }
-            </tbody>
         </table>
     </div>
 </div>
+@section Scripts {
+    <script src="~/js/parent.js"></script>
+}

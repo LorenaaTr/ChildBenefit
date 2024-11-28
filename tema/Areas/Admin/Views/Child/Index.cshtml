@@ -18,7 +18,7 @@
                 </a>
             </div>
         </div>
-        <table class="table table-bordered table-striped">
+        <table id="tblData2" class="table table-bordered table-striped">
             <thead>
                 <tr>
                     <th>Emri</th>
@@ -30,30 +30,10 @@
                     <th> </th>
                 </tr>
             </thead>
-            <tbody>
-                @foreach (var obj in Model)
-                {
-                    <tr>
-                        <td>@obj.Name</td>
-                        <td>@obj.Surname</td>
-                        <td>@obj.PersonalNo</td>
-                        <td>@obj.DateOfBirth.ToString("dd/MM/yyyy")</td>
-                        <td>@obj.Relation.AlDescription</td>
-                        <td>@obj.Status.AlDescription</td>
-                        <td>
-                            <div class="w-75 btn-group" role="group">
-                                <a asp-controller="Child" asp-action="Edit" asp-route-id="@obj.IdChild" class="btn btn-primary mx-2">
-                                    <i class="bi bi-pencil-square"></i>Edit
-                                </a>
-                                <a asp-controller="Child" asp-action="Delete" asp-route-id="@obj.IdChild" method="post" class="btn btn-danger mx-2">
-                                    <i class="bi bi-trash-fill"></i>Delete
-                                </a>
-
-                            </div>
-                        </td>
-                    </tr>
-                }
-            </tbody>
         </table>
     </div>
 </div>
+
+@section Scripts {
+    <script src="~/js/child.js"></script>
+}

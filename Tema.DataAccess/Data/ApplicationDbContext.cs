@@ -22,10 +22,10 @@ namespace tema.Data
         public DbSet<Relation> Relations { get; set; }
         public DbSet<Bank> Banks { get; set; }
         public DbSet<Status> Statuses { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<Parent> Parents { get; set; }
         public DbSet<Child> Children { get; set; }
         public DbSet<Case> Case { get; set; }
-        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -21,7 +21,7 @@ namespace tema.Areas.Admin.Controllers
         }
         public IActionResult Create()
         {
-         
+
             ParentVM parentVM = new()
             {
                 RelationList = _unitOfWork.Relation.GetAll().Select(u => new SelectListItem
@@ -83,7 +83,8 @@ namespace tema.Areas.Admin.Controllers
                 TempData["success"] = "Prindi eshte krijuar me sukses";
                 return RedirectToAction("Index");
             }
-            else {
+            else
+            {
                 parentVM.RelationList = _unitOfWork.Relation.GetAll().Select(u => new SelectListItem
                 {
                     Text = u.AlDescription,
@@ -131,7 +132,7 @@ namespace tema.Areas.Admin.Controllers
                 });
                 return View(parentVM);
             }
-          
+
         }
 
         public IActionResult Edit(int? id)
@@ -158,36 +159,6 @@ namespace tema.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
             return View();
-        }
-
-
-        public IActionResult Delete(int? id)
-        {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-            Parent? parentFromDb = _unitOfWork.Parent.Get(u => u.IdParent == id);
-            if (parentFromDb == null)
-            {
-                return NotFound();
-            }
-            return View(parentFromDb);
-        }
-        [HttpPost, ActionName("Delete")]
-        public IActionResult DeletePOST(int? id)
-        {
-            Parent? obj = _unitOfWork.Parent.Get(u => u.IdParent == id);
-            if (obj == null)
-            {
-                return NotFound();
-            }
-
-            _unitOfWork.Parent.Remove(obj);
-            _unitOfWork.Save();
-            TempData["success"] = "Prindi eshte fshire me sukses";
-            return RedirectToAction("Index");
-
         }
 
         public IActionResult ViewDetails(int? id)
@@ -228,7 +199,28 @@ namespace tema.Areas.Admin.Controllers
             return View(parentVM);
         }
 
+        #region API CALLS
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            List<Parent> objParentList = _unitOfWork.Parent.GetAll(includeProperties: "Gender").ToList();
+            return Json(new { data = objParentList });
+        }
 
+        [HttpDelete]
+        public IActionResult Delete(int? id)
+        {
+            var ParentToBeDeleted = _unitOfWork.Parent.Get(u => u.IdParent == id);
+            if (ParentToBeDeleted == null)
+            {
+                return Json(new { success = false, message = "Error while deleting" });
+            }
+
+            _unitOfWork.Parent.Remove(ParentToBeDeleted);
+            _unitOfWork.Save();
+            return Json(new { success = true, message = "Prindi eshte fshire me sukses! " });
+        }
+        #endregion
 
     }
 }
