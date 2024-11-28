@@ -12,6 +12,10 @@
         <form method="post" class="row">
             <div class="border p-3">
                 <div class="form-floating py-2 col-12">
+                    <input asp-for="Parent.ApplicationDate" type="hidden" class="form-control border-0 shadow" />
+                    <span asp-validation-for="Parent.ApplicationDate" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
                     <input asp-for="Parent.Name" type="text" class="form-control border-0 shadow" />
                     <label asp-for="Parent.Name" class="ms-2">Emri</label>
                     <span asp-validation-for="Parent.Name" class="text-danger"></span>
@@ -118,6 +122,13 @@
                     </select>
                     <label asp-for="Parent.CriteriaId" class="ms-2">Kriteri</label>
                     <span asp-validation-for="Parent.CriteriaId" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <select asp-for="@Model.Parent.StatusId" asp-items="@Model.StatusList" class="form-select border-0 shadow">
+                        <option disabled selected>-Zgjedh Statusin-</option>
+                    </select>
+                    <label asp-for="Parent.StatusId" class="ms-2">Statusi Pageses</label>
+                    <span asp-validation-for="Parent.StatusId" class="text-danger"></span>
                 </div>
                 <div class="row pt-2">
                     <div class="col-6 col-md-3">

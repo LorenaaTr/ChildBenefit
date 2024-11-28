@@ -40,7 +40,6 @@
                     <label asp-for="Parent.GenderId" class="ms-2">Gjinia</label>
                     <span asp-validation-for="Parent.GenderId" class="text-danger"></span>
                 </div>
-             
                 <div class="form-floating py-2 col-12">
                     <input asp-for="Parent.Email" type="text" class="form-control border-0 shadow" />
                     <label class="ms-2">Email</label>
@@ -103,21 +102,18 @@
                     <label class="ms-2">Xhirollogaria</label>
                 </div>
             </div>
-         
-                <div class="row pt-2">
-                    <div class="col-6 col-md-3">
-                        <button type="submit" class="btn btn-primary form-control">Perditso</button>
-                    </div>
-                    <div class="col-6 col-md-3">
-                        <a asp-controller="Parent" asp-action="Index" class="btn btn-outline-secondary form-control border">Kthehu Prapa</a>
-                    </div>
+
+            <div class="row pt-2">
+                <div class="col-6 col-md-3">
+                    <button type="submit" class="btn btn-primary form-control">Perditso</button>
+                </div>
+                <div class="col-6 col-md-3">
+                    <a asp-controller="Parent" asp-action="Index" class="btn btn-outline-secondary form-control border">Kthehu Prapa</a>
                 </div>
             </div>
         </form>
     </div>
 </div>
-
-
 
 @section Scripts {
     @{

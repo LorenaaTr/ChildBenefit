@@ -16,7 +16,7 @@ namespace tema.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            List<Parent> objParentList = _unitOfWork.Parent.GetAll(includeProperties: "Relation,Gender,Language,Country,Region,Nationality,Bank,Criteria,MaritalStatus").ToList();
+            List<Parent> objParentList = _unitOfWork.Parent.GetAll(includeProperties: "Relation,Gender,Language,Country,Region,Nationality,Bank,Criteria,MaritalStatus,Status").ToList();
             return View(objParentList);
         }
         public IActionResult Create()
@@ -69,6 +69,11 @@ namespace tema.Areas.Admin.Controllers
                     Text = u.AlDescription,
                     Value = u.Id.ToString()
                 }),
+                StatusList = _unitOfWork.Status.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.AlDescription,
+                    Value = u.Id.ToString()
+                }),
                 Parent = new Parent()
             };
             return View(parentVM);
@@ -78,6 +83,10 @@ namespace tema.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (parentVM.Parent.ApplicationDate == default)
+                {
+                    parentVM.Parent.ApplicationDate = DateTime.Now;
+                }
                 _unitOfWork.Parent.Add(parentVM.Parent);
                 _unitOfWork.Save();
                 TempData["success"] = "Prindi eshte krijuar me sukses";
@@ -130,6 +139,11 @@ namespace tema.Areas.Admin.Controllers
                     Text = u.AlDescription,
                     Value = u.Id.ToString()
                 });
+                parentVM.StatusList = _unitOfWork.Status.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.AlDescription,
+                    Value = u.Id.ToString()
+                });
                 return View(parentVM);
             }
 
@@ -143,7 +157,7 @@ namespace tema.Areas.Admin.Controllers
             }
 
             // Fetch the Parent object including related properties
-            Parent parentFromDb = _unitOfWork.Parent.Get(u => u.IdParent == id, includeProperties: "Relation,Gender,Language,Country,Region,Nationality,Bank,Criteria,MaritalStatus");
+            Parent parentFromDb = _unitOfWork.Parent.Get(u => u.IdParent == id, includeProperties: "Relation,Gender,Language,Country,Region,Nationality,Bank,Criteria,MaritalStatus,Status");
 
             if (parentFromDb == null)
             {
@@ -207,7 +221,13 @@ namespace tema.Areas.Admin.Controllers
                     Text = u.AlDescription,
                     Value = u.Id.ToString(),
                     Selected = u.Id == parentFromDb.MaritalStatusId // Maintain selection
-                })
+                }),
+                StatusList = _unitOfWork.Status.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.AlDescription,
+                    Value = u.Id.ToString(),
+                    Selected = u.Id == parentFromDb.StatusId 
+                }),
             };
 
             return View(parentVM);
@@ -289,6 +309,12 @@ namespace tema.Areas.Admin.Controllers
                     Value = u.Id.ToString(),
                     Selected = u.Id == parentVM.Parent.MaritalStatusId // Maintain selection
                 });
+                parentVM.StatusList = _unitOfWork.Status.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.AlDescription,
+                    Value = u.Id.ToString(),
+                    Selected = u.Id == parentVM.Parent.StatusId // Maintain selection
+                });
 
                 // Return the view with the populated dropdowns
                 return View(parentVM);
@@ -304,7 +330,7 @@ namespace tema.Areas.Admin.Controllers
             // Fetch parent including related properties for a detailed view
             Parent parentFromDb = _unitOfWork.Parent.GetFirstOrDefault(
                 p => p.IdParent == id,
-                includeProperties: "Relation,Gender,Language,Country,Region,Nationality,Bank,Criteria,MaritalStatus"
+                includeProperties: "Relation,Gender,Language,Country,Region,Nationality,Bank,Criteria,MaritalStatus,Status"
             );
 
             if (parentFromDb == null)

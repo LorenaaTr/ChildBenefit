@@ -25,11 +25,22 @@ namespace tema.Data
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<Parent> Parents { get; set; }
         public DbSet<Child> Children { get; set; }
-        public DbSet<Case> Case { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Child>()
+                .HasOne(c => c.Status)
+                .WithMany()  // Assuming a Status can have many children
+                .HasForeignKey(c => c.StatusId)
+                .OnDelete(DeleteBehavior.NoAction);  // This ensures NO ACTION on delete
+
+            // Configure the relationship between Child and Relation
+            modelBuilder.Entity<Child>()
+                .HasOne(c => c.Relation)
+                .WithMany()  // Assuming a Relation can have many children
+                .HasForeignKey(c => c.RelationId)
+                .OnDelete(DeleteBehavior.NoAction);  // This ensures NO ACTION on delete
             modelBuilder.Entity<Gender>().HasData(
                 new Gender { Id = 1, AlDescription = "Femer", EnDescription = "Female", SrDescription = "Zensko" },
                 new Gender { Id = 2, AlDescription = "Mashkull", EnDescription = "Male", SrDescription = "Muski" },

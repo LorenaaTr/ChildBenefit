@@ -29,5 +29,7 @@ namespace Tema.Models.ViewModels
         public IEnumerable<SelectListItem> RegionList { get; set; }
         [ValidateNever]
         public IEnumerable<SelectListItem> RelationList { get; set; }
+        [ValidateNever]
+        public IEnumerable<SelectListItem> StatusList { get; set; }
     }
 }

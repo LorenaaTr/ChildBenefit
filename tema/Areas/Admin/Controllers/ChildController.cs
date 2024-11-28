@@ -16,7 +16,7 @@ namespace tema.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            List<Child> objChildList = _unitOfWork.Child.GetAll(includeProperties: "Status,Relation").ToList();
+            List<Child> objChildList = _unitOfWork.Child.GetAll(includeProperties: "Status,Relation,Parent").ToList();
             return View(objChildList);
         }
         public IActionResult Create()
@@ -32,6 +32,11 @@ namespace tema.Areas.Admin.Controllers
                 {
                     Text = u.AlDescription,
                     Value = u.Id.ToString()
+                }),
+                ParentList = _unitOfWork.Parent.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.PersonalNo,
+                    Value = u.IdParent.ToString()
                 }),
                 Child = new Child()
             };
@@ -58,6 +63,11 @@ namespace tema.Areas.Admin.Controllers
                 {
                     Text = u.AlDescription,
                     Value = u.Id.ToString()
+                });
+                childVM.ParentList = _unitOfWork.Parent.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.PersonalNo,
+                    Value = u.IdParent.ToString()
                 });
                 return View(childVM);
             }
@@ -90,6 +100,12 @@ namespace tema.Areas.Admin.Controllers
                     Text = u.AlDescription,
                     Value = u.Id.ToString(),
                     Selected = u.Id == childFromDb.StatusId // Set selected based on existing status
+                }),
+                ParentList = _unitOfWork.Parent.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.PersonalNo,
+                    Value = u.IdParent.ToString(),
+                    Selected = u.IdParent == childFromDb.ParentId // Set selected based on existing status
                 })
             };
 
@@ -121,7 +137,12 @@ namespace tema.Areas.Admin.Controllers
                 Value = u.Id.ToString(),
                 Selected = u.Id == childVM.Child.StatusId // Maintain selection
             });
-
+            childVM.ParentList = _unitOfWork.Parent.GetAll().Select(u => new SelectListItem
+            {
+                Text = u.PersonalNo,
+                Value = u.IdParent.ToString(),
+                Selected = u.IdParent == childVM.Child.ParentId // Maintain selection
+            });
             return View(childVM);
         }
 
@@ -129,7 +150,7 @@ namespace tema.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            List<Child> objChildList = _unitOfWork.Child.GetAll(includeProperties: "Relation,Status").ToList();
+            List<Child> objChildList = _unitOfWork.Child.GetAll(includeProperties: "Relation,Status,Parent").ToList();
             return Json(new { data = objChildList });
         }
 

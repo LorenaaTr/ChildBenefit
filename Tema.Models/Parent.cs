@@ -91,7 +91,12 @@ namespace Tema.Models
         [ValidateNever]
         public Relation Relation { get; set; }
 
-  
+        public DateTime ApplicationDate { get; set; } 
+        public int StatusId { get; set; }
 
+        [ForeignKey("StatusId")]
+        [ValidateNever]
+        public Status Status { get; set; }
     }
 }
+

@@ -41,6 +41,10 @@ namespace Tema.Models
         [ForeignKey("RelationId")]
         [ValidateNever]
         public Relation Relation { get; set; }
+        public int ParentId { get; set; }  
+        [ForeignKey("ParentId")]
+        [ValidateNever]
+        public Parent Parent { get; set; }  
 
     }
 }
