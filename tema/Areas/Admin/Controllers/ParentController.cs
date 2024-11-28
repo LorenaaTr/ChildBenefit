@@ -141,26 +141,159 @@ namespace tema.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            Parent parentFromDb = _unitOfWork.Parent.Get(u => u.IdParent == id);
+
+            // Fetch the Parent object including related properties
+            Parent parentFromDb = _unitOfWork.Parent.Get(u => u.IdParent == id, includeProperties: "Relation,Gender,Language,Country,Region,Nationality,Bank,Criteria,MaritalStatus");
+
             if (parentFromDb == null)
             {
                 return NotFound();
             }
-            return View(parentFromDb);
+
+            // Prepare the ParentVM for the dropdown lists with selected values
+            ParentVM parentVM = new ParentVM
+            {
+                Parent = parentFromDb,
+                RelationList = _unitOfWork.Relation.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.AlDescription,
+                    Value = u.Id.ToString(),
+                    Selected = u.Id == parentFromDb.RelationId // Maintain selection
+                }),
+                GenderList = _unitOfWork.Gender.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.AlDescription,
+                    Value = u.Id.ToString(),
+                    Selected = u.Id == parentFromDb.GenderId // Maintain selection
+                }),
+                LanguageList = _unitOfWork.Language.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.AlDescription,
+                    Value = u.Id.ToString(),
+                    Selected = u.Id == parentFromDb.LanguageId // Maintain selection
+                }),
+                CountryList = _unitOfWork.Country.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.AlDescription,
+                    Value = u.Id.ToString(),
+                    Selected = u.Id == parentFromDb.CountryId // Maintain selection
+                }),
+                RegionList = _unitOfWork.Region.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.AlDescription,
+                    Value = u.Id.ToString(),
+                    Selected = u.Id == parentFromDb.RegionId // Maintain selection
+                }),
+                NationalityList = _unitOfWork.Nationality.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.AlDescription,
+                    Value = u.Id.ToString(),
+                    Selected = u.Id == parentFromDb.NationalityId // Maintain selection
+                }),
+                BankList = _unitOfWork.Bank.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.BankName,
+                    Value = u.Id.ToString(),
+                    Selected = u.Id == parentFromDb.BankId // Maintain selection
+                }),
+                CriteriaList = _unitOfWork.Criteria.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.AlDescription,
+                    Value = u.Id.ToString(),
+                    Selected = u.Id == parentFromDb.CriteriaId // Maintain selection
+                }),
+                MaritalStatusList = _unitOfWork.MaritalStatus.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.AlDescription,
+                    Value = u.Id.ToString(),
+                    Selected = u.Id == parentFromDb.MaritalStatusId // Maintain selection
+                })
+            };
+
+            return View(parentVM);
         }
+
         [HttpPost]
-        public IActionResult Edit(Parent obj)
+        public IActionResult Edit(ParentVM parentVM)
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.Parent.Update(obj);
+                // Update the Parent object
+                _unitOfWork.Parent.Update(parentVM.Parent);
                 _unitOfWork.Save();
                 TempData["success"] = "Prindi eshte perditsuar me sukses";
                 return RedirectToAction("Index");
             }
-            return View();
-        }
+            else
+            {
+                // Repopulate dropdowns with selections if the model is invalid
+                parentVM.RelationList = _unitOfWork.Relation.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.AlDescription,
+                    Value = u.Id.ToString(),
+                    Selected = u.Id == parentVM.Parent.RelationId // Maintain selection
+                });
 
+                parentVM.GenderList = _unitOfWork.Gender.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.AlDescription,
+                    Value = u.Id.ToString(),
+                    Selected = u.Id == parentVM.Parent.GenderId // Maintain selection
+                });
+
+                parentVM.LanguageList = _unitOfWork.Language.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.AlDescription,
+                    Value = u.Id.ToString(),
+                    Selected = u.Id == parentVM.Parent.LanguageId // Maintain selection
+                });
+
+                parentVM.CountryList = _unitOfWork.Country.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.AlDescription,
+                    Value = u.Id.ToString(),
+                    Selected = u.Id == parentVM.Parent.CountryId // Maintain selection
+                });
+
+                parentVM.RegionList = _unitOfWork.Region.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.AlDescription,
+                    Value = u.Id.ToString(),
+                    Selected = u.Id == parentVM.Parent.RegionId // Maintain selection
+                });
+
+                parentVM.NationalityList = _unitOfWork.Nationality.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.AlDescription,
+                    Value = u.Id.ToString(),
+                    Selected = u.Id == parentVM.Parent.NationalityId // Maintain selection
+                });
+
+                parentVM.BankList = _unitOfWork.Bank.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.BankName,
+                    Value = u.Id.ToString(),
+                    Selected = u.Id == parentVM.Parent.BankId // Maintain selection
+                });
+
+                parentVM.CriteriaList = _unitOfWork.Criteria.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.AlDescription,
+                    Value = u.Id.ToString(),
+                    Selected = u.Id == parentVM.Parent.CriteriaId // Maintain selection
+                });
+
+                parentVM.MaritalStatusList = _unitOfWork.MaritalStatus.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.AlDescription,
+                    Value = u.Id.ToString(),
+                    Selected = u.Id == parentVM.Parent.MaritalStatusId // Maintain selection
+                });
+
+                // Return the view with the populated dropdowns
+                return View(parentVM);
+            }
+        }
         public IActionResult ViewDetails(int? id)
         {
             if (id == null || id == 0)

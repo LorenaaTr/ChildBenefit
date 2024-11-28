@@ -70,24 +70,59 @@ namespace tema.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            Child genderFromDb = _unitOfWork.Child.Get(u => u.IdChild == id);
-            if (genderFromDb == null)
+            Child childFromDb = _unitOfWork.Child.Get(u => u.IdChild == id);
+            if (childFromDb == null)
             {
                 return NotFound();
             }
-            return View(genderFromDb);
+
+            ChildVM childVM = new()
+            {
+                Child = childFromDb,
+                RelationList = _unitOfWork.Relation.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.AlDescription,
+                    Value = u.Id.ToString(),
+                    Selected = u.Id == childFromDb.RelationId // Set selected based on existing relation
+                }),
+                StatusList = _unitOfWork.Status.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.AlDescription,
+                    Value = u.Id.ToString(),
+                    Selected = u.Id == childFromDb.StatusId // Set selected based on existing status
+                })
+            };
+
+            return View(childVM);
         }
+
         [HttpPost]
-        public IActionResult Edit(Child obj)
+        public IActionResult Edit(ChildVM childVM)
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.Child.Update(obj);
+                _unitOfWork.Child.Update(childVM.Child);
                 _unitOfWork.Save();
                 TempData["success"] = "Femija eshte perditsuar me sukses";
                 return RedirectToAction("Index");
             }
-            return View();
+
+            // Repopulate lists in case of validation errors
+            childVM.RelationList = _unitOfWork.Relation.GetAll().Select(u => new SelectListItem
+            {
+                Text = u.AlDescription,
+                Value = u.Id.ToString(),
+                Selected = u.Id == childVM.Child.RelationId // Maintain selection
+            });
+
+            childVM.StatusList = _unitOfWork.Status.GetAll().Select(u => new SelectListItem
+            {
+                Text = u.AlDescription,
+                Value = u.Id.ToString(),
+                Selected = u.Id == childVM.Child.StatusId // Maintain selection
+            });
+
+            return View(childVM);
         }
 
         #region API CALLS

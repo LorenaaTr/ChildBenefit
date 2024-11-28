@@ -80,7 +80,8 @@ namespace tema.Data
                 );
             modelBuilder.Entity<Relation>().HasData(
                 new Relation { Id =  1, AlDescription = "Femije", EnDescription = "Child", SrDescription = "Deco" },
-                new Relation { Id =  2, AlDescription = "Prind/Kujdestar", EnDescription = "Parent/ Custodian", SrDescription = "Roditejl" }
+                new Relation { Id =  2, AlDescription = "Prind", EnDescription = "Parent", SrDescription = "Roditejl" },
+                new Relation { Id =  3, AlDescription = "Kujdestar", EnDescription = "Custodian", SrDescription = "Roditejl" }
            );
             modelBuilder.Entity<Bank>().HasData(
                new Bank { Id = 1, BankName = "Raiffeisen Bank", AkronimiBankes = "RBKO" },

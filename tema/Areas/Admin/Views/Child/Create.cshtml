@@ -35,14 +35,14 @@
                     <select asp-for="@Model.Child.RelationId" asp-items="@Model.RelationList" class="form-select border-0 shadow">
                        <option disabled selected>-Zgjedh Relacionin-</option>
                    </select>
-                    <label asp-for="Child.RelationId" class="ms-2">Ditelindja</label>
+                    <label asp-for="Child.RelationId" class="ms-2">Relacioni</label>
                     <span asp-validation-for="Child.RelationId" class="text-danger"></span>
                 </div>
                 <div class="form-floating py-2 col-12">
                     <select asp-for="@Model.Child.StatusId" asp-items="@Model.StatusList" class="form-select border-0 shadow">
-                        <option disabled selected>-Zgjedh Relacionin-</option>
+                        <option disabled selected>-Zgjedh Statusin-</option>
                     </select>
-                    <label asp-for="Child.StatusId" class="ms-2">Ditelindja</label>
+                    <label asp-for="Child.StatusId" class="ms-2">Statusi</label>
                     <span asp-validation-for="Child.StatusId" class="text-danger"></span>
                 </div>
                 <div class="row pt-2">
