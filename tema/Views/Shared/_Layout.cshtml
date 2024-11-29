@@ -30,14 +30,14 @@
 
                 <!-- Collapsible Navbar Links -->
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    @if (User.IsInRole(SD.Role_User))
-                  {
+                    @if (!User.IsInRole("Admin"))
+                      {
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-5">
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="User" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="User" asp-controller="Home" asp-action="Privacy">Contact Us</a>
+                                <a class="nav-link text-light" asp-area="User" asp-controller="Feedback" asp-action="Create">Contact Us</a>
                         </li>
                     </ul>
                     }
@@ -144,13 +144,13 @@
         </main>
     </div>
 
- @if (User.IsInRole(SD.Role_User))
+    @if (!User.IsInRole("Admin"))
     {
-       <footer class="text-light bg-primary text-center p-3" >
-        &copy; 2024 - Shtesat e femijeve
+        <footer class="text-light bg-primary text-center p-3">
+            &copy; 2024 - Shtesat e femijeve
         </footer>
-
     }
+
 
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

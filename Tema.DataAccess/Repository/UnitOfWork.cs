@@ -23,6 +23,7 @@ namespace Tema.DataAccess.Repository
         public IStatusRepository Status { get; private set; }
         public IChildRepository Child { get; private set; }
         public IParentRepository Parent { get; private set; }
+        public IFeedbackRepository Feedback { get; private set; }
 
 
 
@@ -41,6 +42,7 @@ namespace Tema.DataAccess.Repository
             Status = new StatusRepository(_db);
             Child = new ChildRepository(_db);
             Parent = new ParentRepository(_db);
+            Feedback = new FeedbackRepository(_db);
         }
 
         public void Save()

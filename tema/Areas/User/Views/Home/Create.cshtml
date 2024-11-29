@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hero Section</title>
+    <style>
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 60vh; /* Merr lartësinë e plotë të ekranit */
+            background-image: url('img/2.png'); /* Ndërroni këtë me foton tuaj */
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Seksioni Hero -->
+    <div class="hero">
+        <div class="hero-text">
+            <h1>Shtesat e Fëmijëve</h1>
+            <h3>Apliko tani!</h3>
+        </div>
+    </div>
+    <!-- Seksioni i Pyetjeve dhe Pergjigjeve -->
+    <div class="cont">
+        <div class="home-container">
+            <!-- Information Section -->
+            <section class="container py-5">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h3>Qeveria e Kosovës dhe Mbështetja për Fëmijët</h3>
+                        <p>
+                            Qeveria e Kosovës ofron mbështetje të vazhdueshme për fëmijët dhe familjet e tyre, duke siguruar një bazë të fortë për zhvillimin dhe mirëqenien e fëmijëve në vend. Ky program është pjesë e angazhimit për një të ardhme më të mirë për fëmijët dhe familjet e Kosovës.
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <img src="~/img/Kosovo.jpg" class="img-fluid image" alt="Government Support for Children">
+                    </div>
+                </div>
+            </section>
+
+            <section class="apply-now-section text-center py-5">
+                <div class="container">
+                    <h2 class="mb-4 fw-bold">Apliko për Shtesa të Fëmijëve</h2>
+                    <p class="mb-4 text-decoration-underline">Nëse dëshironi të aplikoni për shtesat për fëmijët, klikoni butonin më poshtë për të plotësuar formularin e aplikimit.</p>
+                    <a href="/form-aplikimi" class="btn btn-primary btn-lg">Apliko Tani</a>
+                </div>
+            </section>
+
+            <section id="how-it-works" class="py-12 px-8 bg-white">
+                <h2 class="text-3xl font-semibold text-[#1E81B0] mb-4">Procesi i përfitimit të Shtesave të Fëmijëve</h2>
+                <div class="accordion" id="accordionHowItWorks">
+                    <!-- Pyetja 1 -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingHowItWorks1">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHowItWorks1" aria-expanded="true" aria-controls="collapseHowItWorks1">
+                                - Si funksionon programi i Shtesave të Fëmijëve?
+                            </button>
+                        </h2>
+                        <div id="collapseHowItWorks1" class="accordion-collapse collapse" aria-labelledby="headingHowItWorks1" data-bs-parent="#accordionHowItWorks">
+                            <div class="accordion-body">
+                                Programi i Përfitimit të Fëmijëve ofron mbështetje financiare për familjet e kualifikuara me fëmijë në Kosovë. Ky program është krijuar për të ndihmuar në mbulimin e shpenzimeve që lidhen me rritjen e fëmijëve. Përfitimi është në dispozicion për prindërit dhe kujdestarët që plotësojnë kriteret e vendosura nga qeveria.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pyetja 2 -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingHowItWorks2">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHowItWorks2" aria-expanded="false" aria-controls="collapseHowItWorks2">
+                                - Si mund të aplikoj për këtë program?
+                            </button>
+                        </h2>
+                        <div id="collapseHowItWorks2" class="accordion-collapse collapse" aria-labelledby="headingHowItWorks2" data-bs-parent="#accordionHowItWorks">
+                            <div class="accordion-body">
+                                Për të aplikuar për këtë program, duhet të plotësoni formularin e aplikimit në faqen zyrtare të programit dhe të dorëzoni dokumentacionin përkatës që vërteton statusin e familjes dhe numrin e fëmijëve.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pyetja 3 -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingHowItWorks3">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHowItWorks3" aria-expanded="false" aria-controls="collapseHowItWorks3">
+                                - Çfarë dokumenteve kam nevojë për të aplikuar?
+                            </button>
+                        </h2>
+                        <div id="collapseHowItWorks3" class="accordion-collapse collapse" aria-labelledby="headingHowItWorks3" data-bs-parent="#accordionHowItWorks">
+                            <div class="accordion-body">
+                                Dokumentet që ju nevojiten për aplikim janë:
+                                <ul>
+                                    <li>Fotokopje e aktit të lindjes për çdo fëmijë</li>
+                                    <li>Fotokopje e letërnjoftimit të prindit</li>
+                                    <li>Prova të ardhurave të familjes</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    </div>
+    <!-- Bootstrap JavaScript dhe Popper.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.js"></script>
+
+    <script>
+        // Ky kod është për të mundësuar që pyetja të mbyllet po ashtu kur klikoni mbi të
+        const accordionButtons = document.querySelectorAll('.accordion-button');
+        accordionButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const target = document.querySelector(this.getAttribute('data-bs-target'));
+                const isExpanded = target.classList.contains('show');
+                if (isExpanded) {
+                    target.classList.remove('show');
+                } else {
+                    target.classList.add('show');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
