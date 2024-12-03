@@ -1,50 +1,53 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿    using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+    using System;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Tema.Models
-{
-    public class Child
+    namespace Tema.Models
     {
-        [Key]
-        public int IdChild { get; set; }
+        public class Child
+        {
+            [Key]
+            public int IdChild { get; set; }
 
-        [Required]
-        [MaxLength(50)]
-        public string Name { get; set; }
+            [Required(ErrorMessage = "Emri është i kërkuar.")]
+            [MaxLength(50, ErrorMessage = "Emri nuk mund të kalojë 50 karaktere.")]
+            [Display(Name = "Emri i Fëmijës")]
+            public string Name { get; set; }
 
-        [Required]
-        [MaxLength(50)]
-        public string Surname { get; set; }
+            [Required(ErrorMessage = "Mbiemri është i kërkuar.")]
+            [MaxLength(50, ErrorMessage = "Mbiemri nuk mund të kalojë 50 karaktere.")]
+            [Display(Name = "Mbiemri i Fëmijës")]
+            public string Surname { get; set; }
 
-        [Required]
-        public DateTime DateOfBirth { get; set; }  
+            [Range(typeof(DateTime), "1/1/2009", "now", ErrorMessage = "Data e lindjes nuk mund të jetë në të ardhmen.")]
+            [Display(Name = "Data e Lindjes")]
+            public DateTime DateOfBirth { get; set; }
 
-        [Required]
-        [MaxLength(10)]
-        public string PersonalNo { get; set; }
+            [Required(ErrorMessage = "Numri Personal është i kërkuar.")]
+            [StringLength(10, MinimumLength = 10, ErrorMessage = "Numri Personal duhet të ketë 10 karaktere.")]
+            [Display(Name = "Numri Personal")]
+            public string PersonalNo { get; set; }
 
-  
-        public DateTime ApplicationDate { get; set; }
 
-        public int StatusId { get; set; }
-        [ForeignKey("StatusId")]
-        [ValidateNever]
-        public Status Status { get; set; }
+            // Nullable ApplicationDate
+            public DateTime? ApplicationDate { get; set; }
 
-        public int RelationId { get; set; }
-        [ForeignKey("RelationId")]
-        [ValidateNever]
-        public Relation Relation { get; set; }
-        public int ParentId { get; set; }  
-        [ForeignKey("ParentId")]
-        [ValidateNever]
-        public Parent Parent { get; set; }  
+            // Nullable StatusId and RelationId
+            public int? StatusId { get; set; }
+            [ForeignKey("StatusId")]
+            [ValidateNever]
+            public Status Status { get; set; }
 
+            public int? RelationId { get; set; }
+            [ForeignKey("RelationId")]
+            [ValidateNever]
+            public Relation Relation { get; set; }
+
+            // Nullable ParentId
+            public int? ParentId { get; set; }
+            [ForeignKey("ParentId")]
+            [ValidateNever]
+            public Parent Parent { get; set; }
+        }
     }
-}

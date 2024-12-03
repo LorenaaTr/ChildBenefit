@@ -41,7 +41,11 @@ namespace tema.Data
                 .HasOne(c => c.Relation)
                 .WithMany()  // Assuming a Relation can have many children
                 .HasForeignKey(c => c.RelationId)
-                .OnDelete(DeleteBehavior.NoAction);  // This ensures NO ACTION on delete
+                .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Parent>()
+         .HasMany(p => p.Children)
+         .WithOne(c => c.Parent)
+         .HasForeignKey(c => c.ParentId);
             modelBuilder.Entity<Gender>().HasData(
                 new Gender { Id = 1, AlDescription = "Femer", EnDescription = "Female", SrDescription = "Zensko" },
                 new Gender { Id = 2, AlDescription = "Mashkull", EnDescription = "Male", SrDescription = "Muski" },

@@ -3,9 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Tema.Models
 {
@@ -14,89 +11,115 @@ namespace Tema.Models
         [Key]
         public int IdParent { get; set; }
 
-        [Required]
-        [MaxLength(50)]
+        [Required(ErrorMessage = "Emri është i kërkuar.")]
+        [MaxLength(50, ErrorMessage = "Emri nuk mund të kalojë 50 karaktere.")]
+        [Display(Name = "Emri i Prindit")]
         public string Name { get; set; }
 
-        [Required]
-        [MaxLength(50)]
+        [Required(ErrorMessage = "Mbiemri është i kërkuar.")]
+        [MaxLength(50, ErrorMessage = "Mbiemri nuk mund të kalojë 50 karaktere.")]
+        [Display(Name = "Mbiemri i Prindit")]
         public string Surname { get; set; }
 
-        [MaxLength(50)]
-        public string MaidenName { get; set; }
+        // Nullable MaidenName
+        [MaxLength(50, ErrorMessage = "Emri i vajzërisë nuk mund të kalojë 50 karaktere.")]
+        [Display(Name = "Emri i Vajzërisë")]
+        public string? MaidenName { get; set; }
 
-        [Required]
-        [MaxLength(10)]
+        [Required(ErrorMessage = "Numri Personal është i kërkuar.")]
+        [StringLength(10, MinimumLength = 10, ErrorMessage = "Numri Personal duhet të ketë 10 karaktere.")]
+        [Display(Name = "Numri Personal")]
         public string PersonalNo { get; set; }
 
-        [Required]
+        [Range(typeof(DateTime), "1/1/1965", "now", ErrorMessage = "Data e lindjes nuk mund të jetë në të ardhmen.")]
+        [Display(Name = "Data e Lindjes")]
         public DateTime DateOfBirth { get; set; }
 
-        [Required]
-        [MaxLength(100)]
+        [Required(ErrorMessage = "Adresa është e kërkuar.")]
+        [MaxLength(100, ErrorMessage = "Adresa nuk mund të kalojë 100 karaktere.")]
+        [Display(Name = "Adresa")]
         public string Address { get; set; }
 
-        [Required]
-        [MaxLength(15)]
+        [Required(ErrorMessage = "Numri i Kontaktit është i kërkuar.")]
+        [MaxLength(15, ErrorMessage = "Numri i Kontaktit nuk mund të kalojë 15 karaktere.")]
+        [Display(Name = "Numri i Kontaktit")]
         public string ContactNumber { get; set; }
 
-        [MaxLength(50)]
+        // Nullable Email
+        [MaxLength(50, ErrorMessage = "Emaili nuk mund të kalojë 50 karaktere.")]
+        [EmailAddress(ErrorMessage = "Adresa e Emailit nuk është e saktë.")]
+        [Display(Name = "Emaili")]
         public string Email { get; set; }
-        [Required]
-        [MaxLength(20)]
+
+        [Required(ErrorMessage = "Numri i Llogarisë Bankare është i kërkuar.")]
+        [StringLength(16, MinimumLength = 16, ErrorMessage = "Numri Personal duhet të ketë 16 karaktere.")]
+        [Display(Name = "Numri i Llogarisë Bankare")]
         public string BankAccountNumber { get; set; }
 
-        public int BankId { get; set; }
+        // Nullable BankId
+        public int? BankId { get; set; }
         [ForeignKey("BankId")]
         [ValidateNever]
         public Bank Bank { get; set; }
 
-        public int CountryId { get; set; }
+        // Nullable CountryId
+        public int? CountryId { get; set; }
         [ForeignKey("CountryId")]
         [ValidateNever]
         public Country Country { get; set; }
 
-        public int CriteriaId { get; set; }
+        // Nullable CriteriaId
+        public int? CriteriaId { get; set; }
         [ForeignKey("CriteriaId")]
         [ValidateNever]
         public Criteria Criteria { get; set; }
 
-        public int GenderId { get; set; }
+        // Nullable GenderId
+        public int? GenderId { get; set; }
         [ForeignKey("GenderId")]
         [ValidateNever]
         public Gender Gender { get; set; }
 
-        public int LanguageId { get; set; }
+        // Nullable LanguageId
+        public int? LanguageId { get; set; }
         [ForeignKey("LanguageId")]
         [ValidateNever]
         public Language Language { get; set; }
 
-        public int MaritalStatusId { get; set; }
+        // Nullable MaritalStatusId
+        public int? MaritalStatusId { get; set; }
         [ForeignKey("MaritalStatusId")]
         [ValidateNever]
         public MaritalStatus MaritalStatus { get; set; }
 
-        public int NationalityId { get; set; }
+        // Nullable NationalityId
+        public int? NationalityId { get; set; }
         [ForeignKey("NationalityId")]
         [ValidateNever]
         public Nationality Nationality { get; set; }
 
-        public int RegionId { get; set; }
+        // Nullable RegionId
+        public int? RegionId { get; set; }
         [ForeignKey("RegionId")]
         [ValidateNever]
         public Region Region { get; set; }
 
-        public int RelationId { get; set; }
+        // Nullable RelationId
+        public int? RelationId { get; set; }
         [ForeignKey("RelationId")]
         [ValidateNever]
         public Relation Relation { get; set; }
 
-        public DateTime ApplicationDate { get; set; } 
-        public int StatusId { get; set; }
+        // Nullable ApplicationDate
+        public DateTime? ApplicationDate { get; set; }
 
+        // Nullable StatusId
+        public int? StatusId { get; set; }
         [ForeignKey("StatusId")]
         [ValidateNever]
         public Status Status { get; set; }
+
+        // Lazy-loaded navigation property
+        public ICollection<Child> Children { get; set; } = new List<Child>();
     }
 }
-

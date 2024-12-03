@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using tema.Data;
 using Tema.DataAccess.Repository.IRepository;
 using Tema.Models;
 

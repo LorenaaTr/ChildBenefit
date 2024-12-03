@@ -1,0 +1,179 @@
+﻿@model FamilyVM
+
+<form method="post" asp-action="Create" class="container py-4 bg-light rounded shadow-sm" style="margin-top:40px;">
+<fieldset class="mb-4 border p-3 rounded">
+    <legend class="fw-bold text-primary">Te dhenat e Prindit</legend>
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label asp-for="Parent.Name" class="form-label">Emri</label>
+            <input asp-for="Parent.Name" class="form-control" placeholder="Emri prindit..." />
+            <span asp-validation-for="Parent.Name" class="text-danger"></span>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label asp-for="Parent.MaidenName" class="form-label"> Mbiemri Vajzeris</label>
+            <input asp-for="Parent.MaidenName" class="form-control" placeholder="Mbiemri Vajzeris..." />
+            <span asp-validation-for="Parent.MaidenName" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label asp-for="Parent.Surname" class="form-label">Mbiemri</label>
+            <input asp-for="Parent.Surname" class="form-control" placeholder="Mbiemri..." />
+            <span asp-validation-for="Parent.Surname" class="text-danger"></span>
+        </div>
+     
+        <div class="col-md-6 mb-3">
+            <label asp-for="Parent.PersonalNo" class="form-label">Numri Personal</label>
+            <input asp-for="Parent.PersonalNo" class="form-control" placeholder="Numri Personal..." />
+            <span asp-validation-for="Parent.PersonalNo" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label asp-for="Parent.GenderId" class="form-label">Gjinia</label>
+            <select asp-for="Parent.GenderId" asp-items="Model.GenderList" class="form-select">
+                <option value="">-- Zgjedh Gjinin --</option>
+            </select>
+            <span asp-validation-for="Parent.GenderId" class="text-danger"></span>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label asp-for="Parent.Email" class="form-label">Email Adresa</label>
+            <input asp-for="Parent.Email" class="form-control" placeholder="Email prindit ..." />
+            <span asp-validation-for="Parent.Email" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label asp-for="Parent.ContactNumber" class="form-label">Numri Kontaktues</label>
+            <input asp-for="Parent.ContactNumber" class="form-control" placeholder="Numri kontaktues i prindit..." />
+            <span asp-validation-for="Parent.ContactNumber" class="text-danger"></span>
+        </div>
+           <div class="col-md-6 mb-3">
+            <label asp-for="Parent.DateOfBirth" class="form-label">Ditelindja</label>
+            <input asp-for="Parent.DateOfBirth" class="form-control" placeholder="Ditelindja prindit..." type="date" max="{{currentDate}}" />
+            <span asp-validation-for="Parent.DateOfBirth" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label asp-for="Parent.LanguageId" class="form-label">Gjuha</label>
+            <select asp-for="Parent.LanguageId" asp-items="Model.LanguageList" class="form-select">
+                <option value="">-- Zgjedh Gjuhen--</option>
+            </select>
+            <span asp-validation-for="Parent.LanguageId" class="text-danger"></span>
+        </div>
+     
+        <div class="col-md-6 mb-3">
+            <label asp-for="Parent.Address" class="form-label">Adresa Banimit </label>
+            <input asp-for="Parent.Address" class="form-control" placeholder="Adresa Banimit..." />
+            <span asp-validation-for="Parent.Address" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label asp-for="Parent.MaritalStatusId" class="form-label">Statusi Martesor</label>
+            <select asp-for="Parent.MaritalStatusId" asp-items="Model.MaritalStatusList" class="form-select">
+                <option value="">-- Zgjedh Statusin Martesor --</option>
+            </select>
+            <span asp-validation-for="Parent.MaritalStatusId" class="text-danger"></span>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label asp-for="Parent.RelationId" class="form-label">Relacioni </label>
+            <select asp-for="Parent.RelationId" asp-items="Model.RelationList" class="form-select">
+                <option value="">-- Zgjedh Relacioni--</option>
+            </select>
+            <span asp-validation-for="Parent.RelationId" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label asp-for="Parent.NationalityId" class="form-label">Nacionaliteti </label>
+            <select asp-for="Parent.NationalityId" asp-items="Model.NationalityList" class="form-select">
+                <option value="">-- Zgjedh Nacionalitetin--</option>
+            </select>
+            <span asp-validation-for="Parent.NationalityId" class="text-danger"></span>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label asp-for="Parent.RegionId" class="form-label">Regjioni</label>
+            <select asp-for="Parent.RegionId" asp-items="Model.RegionList" class="form-select">
+                <option value="">-- Zgjedh Regjionin--</option>
+            </select>
+            <span asp-validation-for="Parent.RegionId" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+          <div class="col-md-6 mb-3">
+            <label asp-for="Parent.BankId" class="form-label">Emri Bankes</label>
+            <select asp-for="Parent.BankId" asp-items="Model.BankList" class="form-select">
+                <option value="">-- Select a Bank --</option>
+            </select>
+            <span asp-validation-for="Parent.BankId" class="text-danger"></span>
+        </div>
+           <div class="col-md-6 mb-3">
+            <label asp-for="Parent.BankAccountNumber" class="form-label">Xhirollogaria Bankare</label>
+            <input asp-for="Parent.BankAccountNumber" class="form-control" placeholder="Xhirollogaria Bankare e prindit..." />
+            <span asp-validation-for="Parent.BankAccountNumber" class="text-danger"></span>
+        </div>
+    </div>
+</fieldset>
+
+
+    <fieldset class="mb-4 border p-3 rounded">
+        <legend class="fw-bold text-primary">Te dhenat e Femijeve</legend>
+        <div id="children-container">
+            @for (int i = 0; i < Model.Children.Count; i++)
+            {
+                <div class="mb-3 p-2 bg-white border rounded">
+                    <label asp-for="Children[i].Name" class="form-label">Emri Femiut</label>
+                    <input asp-for="Children[i].Name" class="form-control" placeholder="Shkruaj emrin e femiut" />
+                    <span asp-validation-for="Children[i].Name" class="text-danger"></span>
+                    <br />
+                    <label asp-for="Children[i].Surname" class="form-label">Mbiemri Femiut</label>
+                    <input asp-for="Children[i].Surname" class="form-control" placeholder="Shkruaj mbiemrin e femiut" />
+                    <span asp-validation-for="Children[i].Surname" class="text-danger"></span>
+                     <br />
+                    <label asp-for="Children[i].DateOfBirth" class="form-label">Ditelindja</label>
+                    <input asp-for="Children[i].DateOfBirth" class="form-control" type="date" max="{{currentDate}}" />
+                    <span asp-validation-for="Children[i].DateOfBirth" class="text-danger"></span>
+                     <br />
+                    <label asp-for="Children[i].PersonalNo" class="form-label">Numri Personal</label>
+                    <input asp-for="Children[i].PersonalNo" class="form-control" placeholder="Numri personal i femijes..." />
+                   <span asp-validation-for="Children[i].PersonalNo" class="text-danger"></span>
+                   </div>
+            }
+        </div>
+        <button type="button" class="btn btn-secondary mb-3" onclick="addChild()">Shto Femije</button>
+    </fieldset>
+    <button type="submit" class="btn btn-primary">Apliko</button>
+</form>
+
+<script>
+  let childIndex = @Model.Children.Count;
+function addChild() {
+    const container = document.getElementById('children-container');
+    container.innerHTML += `
+        <div class="mb-3 p-2 bg-white border rounded">
+          <label class="form-label">Emri Femiut</label>
+            <input name="Children[${childIndex}].Name" class="form-control" placeholder="Shkruaj emrin e femiut" />
+            <span class="text-danger"></span>
+
+            <label class="form-label">Mbiemri Femiut</label>
+            <input name="Children[${childIndex}].Surname" class="form-control" placeholder="Shkruaj mbiemrin e femiut" />
+            <span class="text-danger"></span>
+
+            <label class="form-label">Ditelindja</label>
+            <input name="Children[${childIndex}].DateOfBirth" class="form-control" type="date" />
+            <span class="text-danger"></span>
+
+            <label class="form-label">Numri Personal</label>
+            <input name="Children[${childIndex}].PersonalNo" class="form-control" placeholder="Numri personal i femijes..." />
+            <span class="text-danger"></span>
+        </div>
+    `;
+    childIndex++;
+       // Reinitialize validation for dynamically added elements
+    $.validator.unobtrusive.parse(container);
+}
+
+
+</script>
