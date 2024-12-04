@@ -115,6 +115,19 @@ namespace tema.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+
+                    // Get the user after login to check if they are an admin
+                    var user = await _signInManager.UserManager.FindByNameAsync(Input.UserName);
+
+                    // Check if the user is an admin
+                    if (await _signInManager.UserManager.IsInRoleAsync(user, "Admin"))
+                    {
+                        // Redirect admin to the Dashboard controller's Index action
+                        return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+
+                    }
+
+                    // For non-admin users, redirect to the original returnUrl (home page or whatever page they tried to access)
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)

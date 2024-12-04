@@ -21,6 +21,7 @@ namespace Tema.DataAccess.Repository.IRepository
         IChildRepository Child { get; }
         IParentRepository Parent { get; }
         IFeedbackRepository Feedback { get; }
+        IApplicationUserRepository ApplicationUser { get; }
         void Save();
     }
 }
