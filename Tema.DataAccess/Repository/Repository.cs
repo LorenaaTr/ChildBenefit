@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using System.Linq.Expressions;
+using System.Linq;
 using tema.Data;
 using Tema.DataAccess.Repository.IRepository;
 
@@ -14,6 +16,7 @@ namespace Tema.DataAccess.Repository
         {
             _db = db;
             this.dbSet = _db.Set<T>();
+            _db.Parents.Include(u => u.Relation).Include(u => u.Gender).Include(u => u.Language).Include(u => u.Country).Include(u => u.Region).Include(u => u.Nationality).Include(u => u.Bank).Include(u => u.Criteria).Include(u => u.MaritalStatus).Include(u => u.Status);
         }
         public void Add(T entity)
         {
@@ -40,10 +43,14 @@ namespace Tema.DataAccess.Repository
             return query.FirstOrDefault();
         }
 
-        public IEnumerable<T> GetAll(string? includeProperties = null)
+        public IEnumerable<T> GetAll(Expression<Func<T, bool>>? filter, string? includeProperties = null)
         {
             IQueryable<T> query = dbSet;
-            if (!string.IsNullOrEmpty(includeProperties)) 
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+            if (!string.IsNullOrEmpty(includeProperties))
             {
                 foreach (var includeProp in includeProperties
                     .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
@@ -53,6 +60,7 @@ namespace Tema.DataAccess.Repository
             }
             return query.ToList();
         }
+
 
         public void Remove(T entity)
         {

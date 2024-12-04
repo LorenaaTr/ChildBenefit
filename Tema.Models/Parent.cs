@@ -28,12 +28,15 @@ namespace Tema.Models
 
         [Required(ErrorMessage = "Numri Personal është i kërkuar.")]
         [StringLength(10, MinimumLength = 10, ErrorMessage = "Numri Personal duhet të ketë 10 karaktere.")]
+        [RegularExpression(@"^\d{10}$", ErrorMessage = "Numri Personal duhet të përmbajë vetëm numra.")]
         [Display(Name = "Numri Personal")]
         public string PersonalNo { get; set; }
 
-        [Range(typeof(DateTime), "1/1/1965", "now", ErrorMessage = "Data e lindjes nuk mund të jetë në të ardhmen.")]
+
+        [Range(typeof(DateTime), "1/1/2009", "12/31/2024", ErrorMessage = "Data e lindjes duhet të jetë midis 1 Janar 2009 dhe 31 Dhjetor 2024.")]
         [Display(Name = "Data e Lindjes")]
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
+
 
         [Required(ErrorMessage = "Adresa është e kërkuar.")]
         [MaxLength(100, ErrorMessage = "Adresa nuk mund të kalojë 100 karaktere.")]
@@ -119,7 +122,5 @@ namespace Tema.Models
         [ValidateNever]
         public Status Status { get; set; }
 
-        // Lazy-loaded navigation property
-        public ICollection<Child> Children { get; set; } = new List<Child>();
     }
 }

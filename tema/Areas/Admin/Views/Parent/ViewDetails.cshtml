@@ -33,9 +33,10 @@
                             <label class="ms-2">Numri Personal</label>
                         </div>
                         <div class="form-floating py-2">
-                            <input value="@Model.Parent.DateOfBirth.ToString("dd/MM/yyyy")" type="text" class="form-control border-0 shadow" readonly />
+                            <input value="@Model.Parent.DateOfBirth?.ToString("dd/MM/yyyy") ?? string.Empty" type="text" class="form-control border-0 shadow" readonly />
                             <label class="ms-2">Ditelindja</label>
                         </div>
+
                         <div class="form-floating py-2">
                             <input asp-for="Parent.Email" type="text" class="form-control border-0 shadow" readonly />
                             <label class="ms-2">Email</label>

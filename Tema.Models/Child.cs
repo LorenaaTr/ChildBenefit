@@ -20,7 +20,7 @@
             [Display(Name = "Mbiemri i Fëmijës")]
             public string Surname { get; set; }
 
-            [Range(typeof(DateTime), "1/1/2009", "now", ErrorMessage = "Data e lindjes nuk mund të jetë në të ardhmen.")]
+            [Range(typeof(DateTime), "1/1/2009", "12/31/2024", ErrorMessage = "Data e lindjes eshte e detyrushme.Femijet mbi 16 vjeq nuk mund te aplikojn per shtesat te femijeve!")]
             [Display(Name = "Data e Lindjes")]
             public DateTime DateOfBirth { get; set; }
 

@@ -362,7 +362,7 @@ namespace tema.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            List<Parent> objParentList = _unitOfWork.Parent.GetAll(includeProperties: "Gender").ToList();
+            List<Parent> objParentList = _unitOfWork.Parent.GetAll(includeProperties: "Relation,Gender,Language,Country,Region,Nationality,Bank,Criteria,MaritalStatus,Status").ToList();
             return Json(new { data = objParentList });
         }
 

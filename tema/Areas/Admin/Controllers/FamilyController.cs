@@ -51,17 +51,18 @@ namespace tema.Areas.Admin.Controllers
             // Check if any child's PersonalNo already exists in the database
             foreach (var child in familyVM.Children)
             {
-                var existingChild = _unitOfWork.Child.GetAll().FirstOrDefault(c => c.PersonalNo == child.PersonalNo);
+                var existingChild = _unitOfWork.Child.Get(c => c.PersonalNo == child.PersonalNo);
                 if (existingChild != null)
                 {
                     // If PersonalNo exists, add an error and return to the view
                     ModelState.AddModelError($"Children[{familyVM.Children.IndexOf(child)}].PersonalNo",
-                    $"Child with PersonalNo {child.PersonalNo} already exists in the system.");
+                    $"Femija me numer personal  {child.PersonalNo} tashme egziston e sistem");
 
                     ReloadDropdowns(familyVM);
                     return View(familyVM);
                 }
             }
+
 
             // Save Parent
             familyVM.Parent.ApplicationDate ??= DateTime.Now;

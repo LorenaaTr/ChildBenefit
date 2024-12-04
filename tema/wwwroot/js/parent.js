@@ -19,7 +19,7 @@ function loadDataTable() {
                 render: function (data) {
                     if (data) {
                         const date = new Date(data);
-                        return date.toLocaleDateString(); 
+                        return date.toLocaleDateString();
                     }
                     return '';
                 }
@@ -38,7 +38,7 @@ function loadDataTable() {
                 },
                 "width": "30%"
             }
-        ] 
+        ]
     });
 }
 
