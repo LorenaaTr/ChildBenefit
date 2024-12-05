@@ -161,7 +161,7 @@ namespace tema.Areas.Admin.Controllers
             }
             else
             {
-                TempData["error"] = "Nuk ka prindër pa pagesa në sistem.";
+                TempData["success"] = "Nuk ka prindër pa pagesa në sistem.";
             }
 
             return RedirectToAction("Index"); // Ose mund të ridrejtoni diku tjetër
