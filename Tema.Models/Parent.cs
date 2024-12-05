@@ -33,8 +33,7 @@ namespace Tema.Models
         public string PersonalNo { get; set; }
 
 
-        [Range(typeof(DateTime), "1/1/2009", "12/31/2024", ErrorMessage = "Data e lindjes duhet të jetë midis 1 Janar 2009 dhe 31 Dhjetor 2024.")]
-        [Display(Name = "Data e Lindjes")]
+        
         public DateTime? DateOfBirth { get; set; }
 
 
@@ -54,9 +53,7 @@ namespace Tema.Models
         [Display(Name = "Emaili")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Numri i Llogarisë Bankare është i kërkuar.")]
-        [StringLength(16, MinimumLength = 16, ErrorMessage = "Numri Personal duhet të ketë 16 karaktere.")]
-        [Display(Name = "Numri i Llogarisë Bankare")]
+      
         public string BankAccountNumber { get; set; }
 
         // Nullable BankId

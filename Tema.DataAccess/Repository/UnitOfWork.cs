@@ -25,8 +25,7 @@ namespace Tema.DataAccess.Repository
         public IParentRepository Parent { get; private set; }
         public IFeedbackRepository Feedback { get; private set; }
         public IApplicationUserRepository ApplicationUser { get; private set; }
-
-
+        public IPaymentRepository Payment { get; private set; }
 
         public UnitOfWork(ApplicationDbContext db) 
         {
@@ -45,6 +44,7 @@ namespace Tema.DataAccess.Repository
             Parent = new ParentRepository(_db);
             Feedback = new FeedbackRepository(_db);
             ApplicationUser = new ApplicationUserRepository(_db);
+            Payment = new PaymentRepository(_db);
         }
 
         public void Save()

@@ -67,7 +67,7 @@ namespace tema.Areas.Admin.Controllers
             // Save Parent
             familyVM.Parent.ApplicationDate ??= DateTime.Now;
             familyVM.Parent.CountryId = 1;  // Set default CountryId to 1
-            familyVM.Parent.StatusId = 4;   // Set default StatusId to 4
+            familyVM.Parent.StatusId = 1;   // Set default StatusId to 4
 
             // After saving all children, count the number of children for the parent
             var childrenCount = familyVM.Children.Count();

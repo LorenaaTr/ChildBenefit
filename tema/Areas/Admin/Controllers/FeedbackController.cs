@@ -32,6 +32,7 @@ namespace tema.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                obj.DateSubmitted = DateTime.Now;
                 _unitOfWork.Feedback.Add(obj);
                 _unitOfWork.Save();
                 TempData["success"] = "Mesazhi është dërguar me sukses";

@@ -26,6 +26,7 @@ namespace tema.Data
         public DbSet<Parent> Parents { get; set; }
         public DbSet<Child> Children { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
+        public DbSet<Payment> Payments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -42,7 +43,13 @@ namespace tema.Data
                 .WithMany()  // Assuming a Relation can have many children
                 .HasForeignKey(c => c.RelationId)
                 .OnDelete(DeleteBehavior.NoAction);
-           
+
+            modelBuilder.Entity<Payment>()
+             .HasOne(c => c.Parent)
+             .WithMany()  // Assuming a Relation can have many children
+             .HasForeignKey(c => c.IdParent)
+             .OnDelete(DeleteBehavior.NoAction);
+
             modelBuilder.Entity<Gender>().HasData(
                 new Gender { Id = 1, AlDescription = "Femer", EnDescription = "Female", SrDescription = "Zensko" },
                 new Gender { Id = 2, AlDescription = "Mashkull", EnDescription = "Male", SrDescription = "Muski" },

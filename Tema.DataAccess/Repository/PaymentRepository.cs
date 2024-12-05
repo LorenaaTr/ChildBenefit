@@ -5,10 +5,10 @@ using Tema.Models;
 
 namespace Tema.DataAccess.Repository
 {
-    public class BankRepository : Repository<Bank>, IBankRepository
+    public class PaymentRepository : Repository<Payment>, IPaymentRepository
     {
         private ApplicationDbContext _db;
-        public BankRepository(ApplicationDbContext db) : base(db)
+        public PaymentRepository(ApplicationDbContext db) : base(db)
         {
             _db = db;
         }
@@ -17,9 +17,9 @@ namespace Tema.DataAccess.Repository
             _db.SaveChanges();
         }
 
-        public void Update(Bank obj)
+        public void Update(Payment obj)
         {
-            _db.Banks.Update(obj);
+            _db.Payments.Update(obj);
         }
     }
 }

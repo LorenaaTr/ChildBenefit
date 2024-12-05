@@ -22,12 +22,10 @@ namespace Tema.DataAccess.Repository
         {
             dbSet.Add(entity);
         }
-
         public void Deactivate(T entity)
         {
             throw new NotImplementedException();
         }
-
         public T Get(System.Linq.Expressions.Expression<Func<T, bool>> filter, string? includeProperties = null)
         {
             IQueryable<T> query = dbSet;
@@ -42,7 +40,6 @@ namespace Tema.DataAccess.Repository
             }
             return query.FirstOrDefault();
         }
-
         public IEnumerable<T> GetAll(Expression<Func<T, bool>>? filter, string? includeProperties = null)
         {
             IQueryable<T> query = dbSet;
@@ -60,8 +57,6 @@ namespace Tema.DataAccess.Repository
             }
             return query.ToList();
         }
-
-
         public void Remove(T entity)
         {
             dbSet.Remove(entity);

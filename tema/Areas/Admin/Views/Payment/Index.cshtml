@@ -1,0 +1,39 @@
+@model List<Payment>
+
+<div class="card shadow border-0 mt-4 content">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-primary">Lista Pagesave</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <div class="row  pb-2 ">
+            <div class="col-6">
+            </div>
+            <div class="col-6 text-end">
+                <a asp-controller="Payment" asp-action="Create" class="btn btn-primary">
+                    <i class="bi bi-plus-circle"></i> Shto Pagese
+                </a>
+            </div>
+        </div>
+        <form method="post" asp-action="CalculatePaymentsForParentsNotInPayment">
+            <button type="submit" class="btn btn-success">Kalkulo Pagesa për Prindërit e Pashënuar</button>
+        </form>
+        <table id="tblData4" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Data Pageses</th>
+                    <th>Shuma</th>
+                    <th>Nr Personal Prindit</th>
+                    <th>Emri Prindi</th>
+                    <th></th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+@section Scripts {
+    <script src="~/js/payment.js"></script>
+}

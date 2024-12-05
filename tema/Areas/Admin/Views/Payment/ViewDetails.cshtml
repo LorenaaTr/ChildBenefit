@@ -1,0 +1,54 @@
+﻿@model PaymentVM
+
+<div class="card shadow border-0 mt-4 content">
+    <div class="card-header bg-secondary bg-gradient py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-primary">Detajet e Pagesës</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <div class="border p-3 mt-4">
+            <div class="form-floating py-2 col-12">
+                <input asp-for="Payment.PaymentDate" readonly class="form-control border-0 shadow" />
+                <label class="ms-2">Data e Pagesës</label>
+            </div>
+
+            <div class="form-floating py-2 col-12">
+                <input asp-for="Payment.Amount" readonly type="text" class="form-control border-0 shadow" />
+                <label class="ms-2">Shuma e Pagesës</label>
+            </div>
+
+            <div class="form-floating py-2 col-12">
+                <select asp-for="Payment.IdParent" asp-items="Model.ParentList" disabled class="form-select border-0 shadow">
+                    <option>-Zgjedh Prindin-</option>
+                </select>
+                <label asp-for="Payment.IdParent" class="ms-2">Prindi</label>
+            </div>
+
+            <div class="form-floating py-2 col-12">
+                <input asp-for="ChildCount" readonly type="text" class="form-control border-0 shadow" />
+                <label class="ms-2">Numri i Fëmijëve</label>
+            </div>
+
+            <h5 class="mt-4">Lista e Fëmijëve</h5>
+            <ul class="list-group">
+                @foreach (var child in Model.Children)
+                {
+                    <li class="list-group-item">@child.Name @child.Surname (@child.DateOfBirth.ToString("dd/MM/yyyy"))</li>
+                }
+            </ul>
+
+            <div class="row pt-4">
+                <div class="col-6 col-md-3">
+                    <a asp-controller="Payment" asp-action="Index" class="btn btn-outline-secondary form-control border">Kthehu Prapa</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Html.Partial("_ValidationScriptsPartial")
+}
