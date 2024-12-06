@@ -12,6 +12,12 @@ namespace Tema.DataAccess.Repository
         {
             _db = db;
         }
+
+        public IEnumerable<Payment> Find(Expression<Func<Payment, bool>> predicate)
+        {
+            return _db.Payments.Where(predicate).ToList();
+        }
+
         public void Save()
         {
             _db.SaveChanges();

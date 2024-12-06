@@ -32,17 +32,49 @@
                 <label class="ms-2">Numri i Fëmijëve</label>
             </div>
 
-            <h5 class="mt-4">Lista e Fëmijëve</h5>
-            <ul class="list-group">
-                @foreach (var child in Model.Children)
+            <!-- Separated Section for Children List -->
+            <div class="mt-4 border p-3 bg-light rounded">
+                <h5 class="mt-0 text-primary">Lista e Fëmijëve</h5>
+                <ul class="list-group">
+                    @foreach (var child in Model.Children)
+                    {
+                        <li class="list-group-item">@child.Name @child.Surname (@child.DateOfBirth.ToString("dd/MM/yyyy"))</li>
+                    }
+                </ul>
+            </div>
+
+            <!-- Separated Section for Payment History -->
+            <div class="mt-4 border p-3 bg-light rounded">
+                <h5 class="mt-0 text-primary">Historia e Pagesave</h5>
+                @if (Model.PaymentHistory.Any())
                 {
-                    <li class="list-group-item">@child.Name @child.Surname (@child.DateOfBirth.ToString("dd/MM/yyyy"))</li>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Data e Pagesës</th>
+                                <th>Shuma e Pagesës</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var payment in Model.PaymentHistory)
+                            {
+                                <tr>
+                                    <td>@payment.PaymentDate.ToString("dd/MM/yyyy")</td>
+                                    <td>@payment.Amount.ToString("C")</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
                 }
-            </ul>
+                else
+                {
+                    <p>Nuk ka ende histori pagesash për këtë prind.</p>
+                }
+            </div>
 
             <div class="row pt-4">
                 <div class="col-6 col-md-3">
-                    <a asp-controller="Payment" asp-action="Index" class="btn btn-outline-secondary form-control border">Kthehu Prapa</a>
+                    <a asp-controller="Payment" asp-action="Index" class="btn btn-primary form-control border">Kthehu Prapa</a>
                 </div>
             </div>
         </div>

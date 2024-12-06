@@ -17,5 +17,6 @@ namespace Tema.Models.ViewModels
         public List<Child> Children { get; set; } = new List<Child>();
         public int ChildCount { get; set; }
         public decimal CalculatedAmount { get; set; }
+        public List<Payment> PaymentHistory { get; set; }
     }
 }

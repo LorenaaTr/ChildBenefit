@@ -94,14 +94,20 @@ namespace tema.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            // Marrja e pagesës nga databaza
+            // Retrieve the payment from the database
             Payment paymentFromDb = _unitOfWork.Payment.Get(u => u.IdPayment == id);
             if (paymentFromDb == null)
             {
                 return NotFound();
             }
 
-            // Krijimi i modelit për View Details
+            // Retrieve the payment history for the parent of the current payment
+            var paymentHistory = _unitOfWork.Payment
+                                              .GetAll(p => p.IdParent == paymentFromDb.IdParent)
+                                              .OrderBy(p => p.PaymentDate) // Sort by payment date
+                                              .ToList();
+
+            // Create the ViewModel for the view
             PaymentVM paymentVM = new PaymentVM
             {
                 Payment = paymentFromDb,
@@ -111,11 +117,13 @@ namespace tema.Areas.Admin.Controllers
                     Value = p.IdParent.ToString()
                 }),
                 Children = _unitOfWork.Child.GetAll(c => c.ParentId == paymentFromDb.IdParent).ToList(),
-                ChildCount = _unitOfWork.Child.GetAll(c => c.ParentId == paymentFromDb.IdParent).Count()
+                ChildCount = _unitOfWork.Child.GetAll(c => c.ParentId == paymentFromDb.IdParent).Count(),
+                PaymentHistory = paymentHistory // Pass the payment history to the view model
             };
 
             return View(paymentVM);
         }
+
 
         [HttpPost]
         public IActionResult CalculatePaymentsForParentsNotInPayment()
@@ -222,6 +230,7 @@ namespace tema.Areas.Admin.Controllers
             // Redirect to the Stripe Checkout session
             return Redirect(session.Url);
         }
+
 
         #region API CALLS
         [HttpGet]
