@@ -7,6 +7,7 @@ using Tema.Utility;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Stripe;
 using tema.Services;
+using OfficeOpenXml;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +27,8 @@ builder.Services.AddScoped<tema.Services.IEmailSender, tema.Services.EmailSender
 //Stripe
 builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("StripeSettings"));
 var key = builder.Configuration.GetValue<string>("StripeSettings:SecretKey");
+// Set the EPPlus LicenseContext
+ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 var app = builder.Build();
 
 app.UseRouting();
