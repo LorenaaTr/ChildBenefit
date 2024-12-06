@@ -9,7 +9,7 @@
         </div>
     </div>
     <div class="card-body p-4">
-        <div class="row  pb-2 ">
+        <div class="row pb-2">
             <div class="col-6">
             </div>
             <div class="col-6 text-end">
@@ -21,6 +21,7 @@
         <form method="post" asp-action="CalculatePaymentsForParentsNotInPayment">
             <button type="submit" class="btn btn-success">Kalkulo Pagesa për Aplikimet e Reja</button>
         </form>
+
         <table id="tblData4" class="table table-bordered table-striped">
             <thead>
                 <tr>
@@ -28,12 +29,14 @@
                     <th>Shuma</th>
                     <th>Nr Personal Prindit</th>
                     <th>Emri Prindi</th>
-                    <th></th>
+                    <th>Detajet</th> <!-- Column for the "Pay Now" button -->
+                    <th>Forma Pageses</th>
                 </tr>
             </thead>
         </table>
     </div>
 </div>
+
 @section Scripts {
     <script src="~/js/payment.js"></script>
 }

@@ -1,10 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Options;
+using Stripe.Checkout;
+using Stripe;
 using tema.Data;
 using Tema.DataAccess.Repository;
 using Tema.DataAccess.Repository.IRepository;
 using Tema.Models;
 using Tema.Models.ViewModels;
+using Tema.Utility;
 
 namespace tema.Areas.Admin.Controllers
 {
@@ -12,9 +16,11 @@ namespace tema.Areas.Admin.Controllers
     public class PaymentController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        public PaymentController(IUnitOfWork unitOfWork)
+        private readonly StripeSettings _stripeSettings;
+        public PaymentController(IUnitOfWork unitOfWork, IOptions<StripeSettings> stripeSettings)
         {
             _unitOfWork = unitOfWork;
+            _stripeSettings = stripeSettings.Value;
         }
         public IActionResult Index()
         {
@@ -167,7 +173,55 @@ namespace tema.Areas.Admin.Controllers
             return RedirectToAction("Index"); // Ose mund të ridrejtoni diku tjetër
         }
 
+        // Method to create a Stripe Checkout session for each parent
+        [HttpPost]
+        public IActionResult CreateCheckoutSession(int parentId)
+        {
+            // Get the payment details for the parent
+            var parentPayment = _unitOfWork.Payment.GetAll(includeProperties: "Parent")
+                                                   .FirstOrDefault(p => p.Parent.IdParent == parentId);
 
+            if (parentPayment == null)
+            {
+                return NotFound("Payment details not found.");
+            }
+
+            decimal amountToPay = parentPayment.Amount; // Assume the amount is stored in the Payment table
+            string currency = "usd"; // You can change this to your currency
+
+            StripeConfiguration.ApiKey = _stripeSettings.SecretKey;
+
+            // Create a Stripe Checkout session for this parent
+            var options = new SessionCreateOptions
+            {
+                PaymentMethodTypes = new List<string> { "card" },
+                LineItems = new List<SessionLineItemOptions>
+                {
+                    new SessionLineItemOptions
+                    {
+                        PriceData = new SessionLineItemPriceDataOptions
+                        {
+                            Currency = currency,
+                            UnitAmount = Convert.ToInt32(amountToPay * 100), // Amount in cents
+                            ProductData = new SessionLineItemPriceDataProductDataOptions
+                            {
+                                Name = $"Payment for {parentPayment.Parent.Name}" // Dynamic product name based on parent
+                            }
+                        },
+                        Quantity = 1
+                    }
+                },
+                Mode = "payment",
+                SuccessUrl = "https://localhost:7227/Stripe/Success", // URL to redirect after payment success
+                CancelUrl = "https://localhost:7227/Stripe/Cancel" // URL to redirect after payment cancel
+            };
+
+            var service = new SessionService();
+            var session = service.Create(options);
+
+            // Redirect to the Stripe Checkout session
+            return Redirect(session.Url);
+        }
 
         #region API CALLS
         [HttpGet]
