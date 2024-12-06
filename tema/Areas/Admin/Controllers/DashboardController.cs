@@ -1,12 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using tema.Data;
 using Tema.DataAccess.Repository.IRepository;
 using Tema.Models.ViewModels;
+using Tema.Utility;
 
 namespace tema.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
     public class DashboardController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

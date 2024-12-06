@@ -4,10 +4,13 @@ using Tema.DataAccess.Repository.IRepository;
 using Tema.Models;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
+using Tema.Utility;
 
 namespace tema.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
     public class FeedbackController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

@@ -10,10 +10,12 @@ using Tema.Models;
 using Tema.Models.ViewModels;
 using Tema.Utility;
 using tema.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace tema.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
     public class PaymentController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

@@ -3,10 +3,13 @@ using OfficeOpenXml;
 using Tema.DataAccess.Repository.IRepository;
 using System.IO;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
+using Tema.Utility;
 
 namespace Tema.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
     public class ReportController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
