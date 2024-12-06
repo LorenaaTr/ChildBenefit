@@ -18,8 +18,14 @@
                 </a>
             </div>
         </div>
-        <form method="post" asp-action="CalculatePaymentsForParentsNotInPayment">
-            <button type="submit" class="btn btn-success">Kalkulo Pagesa për Aplikimet e Reja</button>
+        <form method="post" asp-action="CalculatePaymentsForAllActiveParents">
+            <button type="submit" class="btn btn-success">Kalkulo Pagese</button>
+        </form>
+        <br/>
+        <form method="post" action="@Url.Action("SendPaymentNotificationToActiveParents", "Payment")" onsubmit="return confirm('Are you sure you want to send the payment notification to all active parents?');">
+            <button type="submit" class="btn btn-primary">
+                Dergo Email te Prinderit - Pagesa e Suksesshme
+            </button>
         </form>
 
         <table id="tblData4" class="table table-bordered table-striped">

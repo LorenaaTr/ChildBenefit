@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Tema.Utility;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Stripe;
+using tema.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +21,8 @@ builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Str
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 builder.Services.AddRazorPages();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped<IEmailSender, EmailSender>();
+builder.Services.AddScoped<tema.Services.IEmailSender, tema.Services.EmailSender>();
+
 //Stripe
 builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("StripeSettings"));
 var key = builder.Configuration.GetValue<string>("StripeSettings:SecretKey");
